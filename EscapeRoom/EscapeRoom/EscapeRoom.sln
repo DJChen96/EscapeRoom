@@ -1,12 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeRoom.Plugins", "EscapeRoom.Plugins.csproj", "{2BA9DE66-40F4-57CA-3D80-D21C23ACF3CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeRoom", "EscapeRoom.csproj", "{4B5D7817-EE43-A6C8-BE53-41C2AFE4C3EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeRoom.Editor.Plugins", "EscapeRoom.Editor.Plugins.csproj", "{8CAD3736-1581-851F-0A25-08E8BD59FDB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BA9DE66-40F4-57CA-3D80-D21C23ACF3CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA9DE66-40F4-57CA-3D80-D21C23ACF3CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA9DE66-40F4-57CA-3D80-D21C23ACF3CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA9DE66-40F4-57CA-3D80-D21C23ACF3CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B5D7817-EE43-A6C8-BE53-41C2AFE4C3EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B5D7817-EE43-A6C8-BE53-41C2AFE4C3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B5D7817-EE43-A6C8-BE53-41C2AFE4C3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B5D7817-EE43-A6C8-BE53-41C2AFE4C3EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CAD3736-1581-851F-0A25-08E8BD59FDB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CAD3736-1581-851F-0A25-08E8BD59FDB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CAD3736-1581-851F-0A25-08E8BD59FDB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CAD3736-1581-851F-0A25-08E8BD59FDB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
