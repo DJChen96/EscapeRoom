@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/SampleScenes/Scenes/CharacterFirstPerson.unity
+- path: Assets/Scene/Escape_Room_1.unity
   isLoaded: 1
   isActive: 1
