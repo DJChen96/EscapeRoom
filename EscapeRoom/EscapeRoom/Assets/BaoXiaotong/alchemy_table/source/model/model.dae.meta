@@ -1,0 +1,230 @@
+fileFormatVersion: 2
+guid: 31487261aa283f949aa5a9350b4ca0c1
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: g default
+    100002: g default 1
+    100004: g default 2
+    100006: g default 3
+    100008: g default 4
+    100010: g default 5
+    100012: g default 6
+    100014: g drain_low oven_lo_group polySurface12
+    100016: g holder
+    100018: g oven_lo_group beaker_liquid_low
+    100020: g oven_lo_group boiler_low polySurface13
+    100022: g oven_lo_group furnace_base_low polySurface18
+    100024: g oven_lo_group furnace_door_low
+    100026: g oven_lo_group furnace_guard_low
+    100028: g oven_lo_group furnace_top_low
+    100030: g oven_lo_group hose_low
+    100032: g oven_lo_group polySurface14 boiler_low
+    100034: g oven_lo_group polySurface15 beaker_low
+    100036: g oven_lo_group polySurface16 spout_low
+    100038: g oven_lo_group polySurface19 furnace_base_low
+    100040: g oven_lo_group spout_base_low
+    100042: g oven_lo_group spout_liquid_low
+    100044: g oven_lo_group spout_low polySurface17
+    100046: g oven_lo_group spout_stand_low
+    100048: g polySurface10
+    100050: g polySurface11 drain_low oven_lo_group
+    100052: g table_leg_left3_low table_lo_group
+    100054: g table_lo_group table_leg_back2_low
+    100056: g table_lo_group table_leg_right2_low
+    100058: g table_lo_group table_liquid2_low
+    100060: g table_lo_group table_shelf2_low
+    100062: //RootNode
+    400000: g default
+    400002: g default 1
+    400004: g default 2
+    400006: g default 3
+    400008: g default 4
+    400010: g default 5
+    400012: g default 6
+    400014: g drain_low oven_lo_group polySurface12
+    400016: g holder
+    400018: g oven_lo_group beaker_liquid_low
+    400020: g oven_lo_group boiler_low polySurface13
+    400022: g oven_lo_group furnace_base_low polySurface18
+    400024: g oven_lo_group furnace_door_low
+    400026: g oven_lo_group furnace_guard_low
+    400028: g oven_lo_group furnace_top_low
+    400030: g oven_lo_group hose_low
+    400032: g oven_lo_group polySurface14 boiler_low
+    400034: g oven_lo_group polySurface15 beaker_low
+    400036: g oven_lo_group polySurface16 spout_low
+    400038: g oven_lo_group polySurface19 furnace_base_low
+    400040: g oven_lo_group spout_base_low
+    400042: g oven_lo_group spout_liquid_low
+    400044: g oven_lo_group spout_low polySurface17
+    400046: g oven_lo_group spout_stand_low
+    400048: g polySurface10
+    400050: g polySurface11 drain_low oven_lo_group
+    400052: g table_leg_left3_low table_lo_group
+    400054: g table_lo_group table_leg_back2_low
+    400056: g table_lo_group table_leg_right2_low
+    400058: g table_lo_group table_liquid2_low
+    400060: g table_lo_group table_shelf2_low
+    400062: //RootNode
+    2100000: lambert15SG
+    2100002: lambert20SG
+    2100004: lambert16SG
+    2100006: lambert18SG
+    2100008: lambert17SG
+    2100010: lambert14SG
+    2100012: lambert13SG
+    2300000: g drain_low oven_lo_group polySurface12
+    2300002: g holder
+    2300004: g oven_lo_group beaker_liquid_low
+    2300006: g oven_lo_group boiler_low polySurface13
+    2300008: g oven_lo_group furnace_base_low polySurface18
+    2300010: g oven_lo_group furnace_door_low
+    2300012: g oven_lo_group furnace_guard_low
+    2300014: g oven_lo_group furnace_top_low
+    2300016: g oven_lo_group hose_low
+    2300018: g oven_lo_group polySurface14 boiler_low
+    2300020: g oven_lo_group polySurface15 beaker_low
+    2300022: g oven_lo_group polySurface16 spout_low
+    2300024: g oven_lo_group polySurface19 furnace_base_low
+    2300026: g oven_lo_group spout_base_low
+    2300028: g oven_lo_group spout_liquid_low
+    2300030: g oven_lo_group spout_low polySurface17
+    2300032: g oven_lo_group spout_stand_low
+    2300034: g polySurface10
+    2300036: g polySurface11 drain_low oven_lo_group
+    2300038: g table_leg_left3_low table_lo_group
+    2300040: g table_lo_group table_leg_back2_low
+    2300042: g table_lo_group table_leg_right2_low
+    2300044: g table_lo_group table_liquid2_low
+    2300046: g table_lo_group table_shelf2_low
+    3300000: g drain_low oven_lo_group polySurface12
+    3300002: g holder
+    3300004: g oven_lo_group beaker_liquid_low
+    3300006: g oven_lo_group boiler_low polySurface13
+    3300008: g oven_lo_group furnace_base_low polySurface18
+    3300010: g oven_lo_group furnace_door_low
+    3300012: g oven_lo_group furnace_guard_low
+    3300014: g oven_lo_group furnace_top_low
+    3300016: g oven_lo_group hose_low
+    3300018: g oven_lo_group polySurface14 boiler_low
+    3300020: g oven_lo_group polySurface15 beaker_low
+    3300022: g oven_lo_group polySurface16 spout_low
+    3300024: g oven_lo_group polySurface19 furnace_base_low
+    3300026: g oven_lo_group spout_base_low
+    3300028: g oven_lo_group spout_liquid_low
+    3300030: g oven_lo_group spout_low polySurface17
+    3300032: g oven_lo_group spout_stand_low
+    3300034: g polySurface10
+    3300036: g polySurface11 drain_low oven_lo_group
+    3300038: g table_leg_left3_low table_lo_group
+    3300040: g table_lo_group table_leg_back2_low
+    3300042: g table_lo_group table_leg_right2_low
+    3300044: g table_lo_group table_liquid2_low
+    3300046: g table_lo_group table_shelf2_low
+    4300000: g polySurface11 drain_low oven_lo_group
+    4300002: g oven_lo_group polySurface16 spout_low
+    4300004: g oven_lo_group spout_low polySurface17
+    4300006: g oven_lo_group beaker_liquid_low
+    4300008: g oven_lo_group hose_low
+    4300010: g oven_lo_group spout_stand_low
+    4300012: g oven_lo_group furnace_top_low
+    4300014: g oven_lo_group spout_base_low
+    4300016: g drain_low oven_lo_group polySurface12
+    4300018: g oven_lo_group polySurface15 beaker_low
+    4300020: g table_leg_left3_low table_lo_group
+    4300022: g table_lo_group table_leg_back2_low
+    4300024: g table_lo_group table_leg_right2_low
+    4300026: g table_lo_group table_liquid2_low
+    4300028: g table_lo_group table_shelf2_low
+    4300030: g polySurface10
+    4300032: g holder
+    4300034: g oven_lo_group polySurface14 boiler_low
+    4300036: g oven_lo_group boiler_low polySurface13
+    4300038: g oven_lo_group spout_liquid_low
+    4300040: g oven_lo_group furnace_door_low
+    4300042: g oven_lo_group polySurface19 furnace_base_low
+    4300044: g oven_lo_group furnace_guard_low
+    4300046: g oven_lo_group furnace_base_low polySurface18
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
