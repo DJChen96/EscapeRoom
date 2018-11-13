@@ -150,7 +150,8 @@ public class playerController : MonoBehaviour
             {
                 ClearHighlighted();
                 originalMaterial = gameObject.GetComponent<MeshRenderer>().sharedMaterial;
-                gameObject.GetComponent<MeshRenderer>().sharedMaterial = highlightMaterial;
+                //gameObject.GetComponent<MeshRenderer>().sharedMaterial = highlightMaterial;
+                gameObject.layer = 8;
                 lastHighlightedObject = gameObject;
             }
         }
@@ -161,7 +162,9 @@ public class playerController : MonoBehaviour
     {
         if (lastHighlightedObject != null)
         {
-            lastHighlightedObject.GetComponent<MeshRenderer>().sharedMaterial = originalMaterial;
+            //lastHighlightedObject.GetComponent<MeshRenderer>().sharedMaterial = originalMaterial;
+            Debug.Log("leave");
+            lastHighlightedObject.layer = 0;
             lastHighlightedObject = null;
         }
     }

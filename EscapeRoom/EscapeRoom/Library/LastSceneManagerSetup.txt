@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Escape_Room_1.unity
+- path: Assets/Scene/House on night.unity
   isLoaded: 1
   isActive: 1
