@@ -25,11 +25,14 @@ public class playerController : MonoBehaviour
 
     public float fire_cooldown = 2.0f;
     public bool fire_inCD = false;
-    public bool firemode = false;
-
+    public bool firemode = true;
+    
     public float thunder_cooldown = 5.0f;
     public bool thunder_inCD = false;
     public bool thundermode = false;
+
+    public bool timemode = false;
+    public bool time_triggered = false;
     //magic cooldown
 
     public float sphere_radius = 2.0f;
@@ -37,12 +40,17 @@ public class playerController : MonoBehaviour
     public gameController gc;
     public Vector3 SC_offset = new Vector3(0,0,0);
 
+    public ParticleSystem wandEffect;
+
     public interactItem carryItem = null;
+    
     void Start()
     {
         _body = GetComponent<Rigidbody>();
         _groundChecker = transform.GetChild(0);
-        
+        var wand_main = wandEffect.main;
+        wand_main.startColor = new Color(255f, 58f, 0f);
+
     }
 
     void Update()
@@ -57,6 +65,7 @@ public class playerController : MonoBehaviour
 
         CastFireMagic();
         CastThunderMagic();
+        CastTimeMagic();
         Moving();
         RayCasting();
     }
@@ -126,12 +135,12 @@ public class playerController : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
-    {
-        // Draw a yellow sphere at the transform's position
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, sphere_radius);
-    }
+    //void OnDrawGizmosSelected()
+    //{
+    //    // Draw a yellow sphere at the transform's position
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawSphere(transform.position, sphere_radius);
+    //}
 
     void HighlightObject(GameObject gameObject)
     {
@@ -161,11 +170,13 @@ public class playerController : MonoBehaviour
     void CastFireMagic()
     {
         
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !fire_inCD)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !fire_inCD && ! firemode)
         {
-            print("IN FIRE MODE");
+            var wand_main = wandEffect.main;
+            wand_main.startColor = new Color(255f, 58f, 0f);
+            Debug.Log("IN FIRE MODE");
             firemode = true;
-            thundermode = false;
+            thundermode = timemode =  false;
         }
         if (Input.GetMouseButton(0) && !fire_inCD && firemode)
         {
@@ -186,11 +197,13 @@ public class playerController : MonoBehaviour
     void CastThunderMagic()
     {
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !thunder_inCD)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && !thunder_inCD && !thundermode)
         {
-            print("IN THUNDER MODE");
+            var wand_main = wandEffect.main;
+            wand_main.startColor = new Color(0f, 148f, 255f);
+            Debug.Log("IN THUNDER MODE");
             thundermode = true;
-            firemode = false;
+            firemode = timemode = false;
         }
 
         if (Input.GetMouseButton(0) && !thunder_inCD && thundermode) {
@@ -206,6 +219,27 @@ public class playerController : MonoBehaviour
         {
             thunder_cooldown = 5.0f;
             thunder_inCD = false;
+        }
+    }
+
+    void CastTimeMagic()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) && !time_triggered && !timemode)
+        {
+            var wand_main = wandEffect.main;
+            wand_main.startColor = new Color(0f, 255f, 0f);
+            Debug.Log("IN TIME MODE");
+            timemode = true;
+            thundermode = firemode = false;
+        }
+        if (Input.GetMouseButton(0) && !time_triggered && timemode)
+        {
+            time_triggered = true;
+        }
+        else if (Input.GetMouseButton(0) && time_triggered && timemode)
+        {//on CD
+            time_triggered = false;
         }
     }
 }

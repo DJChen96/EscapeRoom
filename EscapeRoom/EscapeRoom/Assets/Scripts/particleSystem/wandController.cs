@@ -11,6 +11,9 @@ public class wandController : MonoBehaviour {
     public GameObject thunderPrefab;
     public bool thunder_generated = false;
 
+    public GameObject timePrefab;
+    public bool time_generated = false;
+
 	// Use this for initialization
 	void Start () {
         
@@ -25,8 +28,18 @@ public class wandController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        castingFire();
-        castingThunder();
+        castingMagic();
+
+        
+    }
+
+    void castingMagic() {
+        if (pc.firemode)
+            castingFire();
+        else if (pc.thundermode)
+            castingThunder();
+        else if (pc.timemode)
+            castingTime();
     }
 
     void castingFire() {
@@ -62,6 +75,24 @@ public class wandController : MonoBehaviour {
         else if (!pc.thunder_inCD)
         {
             thunder_generated = false;
+        }
+    }
+
+    void castingTime() {
+        if (pc.time_triggered && !time_generated && pc.timemode)
+        {
+            if (timePrefab != null)
+            {
+                print("TIME GENERATED");
+                Instantiate(timePrefab, transform.position + 5.0f*transform.forward + 5.0f*transform.up, pc.transform.rotation);
+                time_generated = true;
+            }
+            else
+                print("NULL TIME PREFAB");
+        }
+        else if (!time_generated)
+        {
+            time_generated = false;
         }
     }
 }

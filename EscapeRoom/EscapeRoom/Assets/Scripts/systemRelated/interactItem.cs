@@ -8,7 +8,7 @@ public class interactItem : MonoBehaviour {
    // public Transform playerCam;
 
     bool hasPlayer;
-    bool beingCarried = false;
+    public bool beingCarried = false;
     public float dist_threshold = 1.0f;
 
     // Use this for initialization
@@ -30,7 +30,7 @@ public class interactItem : MonoBehaviour {
     void RangeTest() {
         if (Vector3.Distance(player.transform.position, this.transform.position) < dist_threshold)
         {
-            Debug.Log("with in range");
+            //Debug.Log("with in range");
             hasPlayer = true;
         }
         else
@@ -41,7 +41,7 @@ public class interactItem : MonoBehaviour {
 
     void PickUp() {
         if ( !beingCarried && hasPlayer && Input.GetKeyDown(KeyCode.F)) {
-            Debug.Log("pick up"+ this.gameObject.name);
+            //Debug.Log("pick up"+ this.gameObject.name);
             GetComponent<Rigidbody>().isKinematic = true;
             transform.parent = player.transform;
             player.carryItem = this;
@@ -49,7 +49,7 @@ public class interactItem : MonoBehaviour {
         }
 
         else if (beingCarried && Input.GetKeyDown(KeyCode.F)) {
-            Debug.Log("drop" + this.gameObject.name);
+            //Debug.Log("drop" + this.gameObject.name);
             GetComponent<Rigidbody>().isKinematic = false;
             transform.parent = null;
             beingCarried = false;

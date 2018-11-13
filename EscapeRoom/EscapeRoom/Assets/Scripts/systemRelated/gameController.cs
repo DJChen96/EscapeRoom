@@ -51,13 +51,15 @@ public class gameController : MonoBehaviour {
             yield return null;
         }
 
+        yield return new WaitForSeconds(2.0f);
+
         mc.gameObject.SetActive(true);
 
-        while (!mc.fire) {
+        while (mc!=null && !mc.fire) {
             yield return null;
         }
 
-        Destroy(mc.gameObject);
+        
         mc = null;
 
 

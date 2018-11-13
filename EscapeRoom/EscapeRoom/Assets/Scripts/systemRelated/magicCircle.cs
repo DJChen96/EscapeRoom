@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class magicCircle : MonoBehaviour {
 
+    public fireStone fs;
     public bool fire = false;
-
 
 	// Use this for initialization
 	void Start () {
@@ -17,10 +17,12 @@ public class magicCircle : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.tag.Equals("FireStone")) {
+        if (other.gameObject.tag.Equals("FireStone") && !fs.beingCarried) {
+            
             fire = true;
+            Destroy(this.gameObject);
         }
     }
 }
