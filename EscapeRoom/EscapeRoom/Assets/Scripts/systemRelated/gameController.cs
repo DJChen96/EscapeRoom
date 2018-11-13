@@ -9,7 +9,8 @@ public class gameController : MonoBehaviour {
     public bool fireStone_Obtained;
     public bool woodStone_Obtained;
     public bool lit_room;
-
+    public GameObject candleGroup;
+    
     public magicCircle mc;
 
     // Use this for initialization
@@ -19,8 +20,9 @@ public class gameController : MonoBehaviour {
 
         fireStone_Obtained = false;
 
-
         StartCoroutine(GameFlow());
+
+        
     }
 
     //Sample:
@@ -39,6 +41,10 @@ public class gameController : MonoBehaviour {
         print("Hi adventurer, nice to meet you in this dark, dark room, use fire to burn the darkness!");
 
         Debug.Log("---------FIRST PUZZLE----------");
+        var candles = candleGroup.GetComponentsInChildren<candle>();
+        foreach (candle c in candles) {
+            lit_room &= c.lit;
+        }
         while (!lit_room) {
             yield return null;
 

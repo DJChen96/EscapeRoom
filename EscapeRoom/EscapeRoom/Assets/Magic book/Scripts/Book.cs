@@ -33,7 +33,7 @@ public class Book : MonoBehaviour {
 
 		if(open == 1)
 		{
-			if(Input.GetKeyUp(KeyCode.LeftArrow))
+			if(Input.GetKeyUp(KeyCode.G))
 			{
 				if(i < Pages.Length)
 				{
@@ -45,7 +45,7 @@ public class Book : MonoBehaviour {
 					i++;
 				}
 			}
-			if(Input.GetKeyUp(KeyCode.RightArrow))
+			if(Input.GetKeyUp(KeyCode.H))
 			{
 				if(i > 0)
 				{

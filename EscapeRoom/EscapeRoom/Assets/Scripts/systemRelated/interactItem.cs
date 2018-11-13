@@ -30,7 +30,7 @@ public class interactItem : MonoBehaviour {
     void RangeTest() {
         if (Vector3.Distance(player.transform.position, this.transform.position) < dist_threshold)
         {
-            //Debug.Log("with in range");
+            Debug.Log("with in range");
             hasPlayer = true;
         }
         else

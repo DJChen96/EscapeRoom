@@ -163,7 +163,7 @@ public class playerController : MonoBehaviour
         if (lastHighlightedObject != null)
         {
             //lastHighlightedObject.GetComponent<MeshRenderer>().sharedMaterial = originalMaterial;
-            Debug.Log("leave");
+            //Debug.Log("leave");
             lastHighlightedObject.layer = 0;
             lastHighlightedObject = null;
         }

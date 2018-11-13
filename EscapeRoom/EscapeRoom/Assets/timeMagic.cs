@@ -7,7 +7,7 @@ using System;
 
 public class timeMagic : MonoBehaviour
 {
-
+    public wandController wc;
     private const float
         hoursToDegrees = 360f / 12f,
         minutesToDegrees = 360f / 60f,
@@ -16,33 +16,42 @@ public class timeMagic : MonoBehaviour
     public Transform minutes;
     public Transform hours;
     public Transform seconds;
-    public bool analog;
 
+    public clock clockPrefab;
+
+    float hour;
+    float minute;
+    float second;
 
     void Start()
     {
-       
+        if (clockPrefab == null)
+            clockPrefab = FindObjectOfType<clock>();
+        wc = FindObjectOfType<wandController>();
+        hour = 11f;
+        minute = 30f;
+        second = 0f;
     }
 
     void Update()
     {
-        if (analog)
-        {
-            TimeSpan timespan = DateTime.Now.TimeOfDay;
-            hours.localRotation =
-                Quaternion.Euler(0f, 0f, (float)timespan.TotalHours * -hoursToDegrees);
-            minutes.localRotation =
-                Quaternion.Euler(0f, 0f, (float)timespan.TotalMinutes * -minutesToDegrees);
-            seconds.localRotation =
-                Quaternion.Euler(0f, 0f, (float)timespan.TotalSeconds * -secondsToDegrees);
-        }
-        else
-        {
-            DateTime time = DateTime.Now;
-            hours.localRotation = Quaternion.Euler(0f, 0f, time.Hour * -hoursToDegrees);
-            minutes.localRotation = Quaternion.Euler(0f, 0f, time.Minute * -minutesToDegrees);
-            seconds.localRotation = Quaternion.Euler(0f, 0f, time.Second * -secondsToDegrees);
-        }
+        
+            
+        
     }
+
+    private void FixedUpdate()
+    {
+       
+
+        hour += (Time.deltaTime * Time.deltaTime * Time.deltaTime);
+        minute += (Time.deltaTime*Time.deltaTime);
+        second += Time.deltaTime;
+
+       
+    }
+
+   
+
 
 }
