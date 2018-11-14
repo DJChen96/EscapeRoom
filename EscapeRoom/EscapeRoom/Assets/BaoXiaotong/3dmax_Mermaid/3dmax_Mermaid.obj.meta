@@ -1,0 +1,203 @@
+fileFormatVersion: 2
+guid: d0c89cf4cb26bd0408042a09b0ba1354
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: 23c41ff0_obj
+    100002: 23c59828_obj
+    100004: 23c71878_obj
+    100006: //RootNode
+    100008: ??
+    100010: ????body
+    100012: Ariel
+    100014: bikini_elf_m00
+    100016: default001
+    100018: element3ds_com_M747
+    100020: npc_16
+    100022: Object001
+    100024: Object01
+    100026: Object10
+    100028: Object41
+    100030: PET38_a_obj1_0_
+    100032: PET38_a_obj1_1_
+    100034: renyugongzhu_01
+    100036: Sphere014
+    100038: Sphere015
+    400000: 23c41ff0_obj
+    400002: 23c59828_obj
+    400004: 23c71878_obj
+    400006: //RootNode
+    400008: ??
+    400010: ????body
+    400012: Ariel
+    400014: bikini_elf_m00
+    400016: default001
+    400018: element3ds_com_M747
+    400020: npc_16
+    400022: Object001
+    400024: Object01
+    400026: Object10
+    400028: Object41
+    400030: PET38_a_obj1_0_
+    400032: PET38_a_obj1_1_
+    400034: renyugongzhu_01
+    400036: Sphere014
+    400038: Sphere015
+    2100000: 23c41ff0_objMat
+    2100002: 23c59828_objMat
+    2100004: 23c71878_objMat
+    2100006: __Mat
+    2100008: ____bodyMat
+    2100010: ArielMat
+    2100012: bikini_elf_m00Mat
+    2100014: default001Mat
+    2100016: element3ds_com_M747Mat
+    2100018: npc_16Mat
+    2100020: Object001Mat
+    2100022: Object01Mat
+    2100024: Object10Mat
+    2100026: Object41Mat
+    2100028: PET38_a_obj1_0_Mat
+    2100030: PET38_a_obj1_1_Mat
+    2100032: renyugongzhu_01Mat
+    2100034: Sphere014Mat
+    2100036: Sphere015Mat
+    2300000: 23c41ff0_obj
+    2300002: 23c59828_obj
+    2300004: 23c71878_obj
+    2300006: ??
+    2300008: ????body
+    2300010: Ariel
+    2300012: bikini_elf_m00
+    2300014: default001
+    2300016: element3ds_com_M747
+    2300018: npc_16
+    2300020: Object001
+    2300022: Object01
+    2300024: Object10
+    2300026: Object41
+    2300028: PET38_a_obj1_0_
+    2300030: PET38_a_obj1_1_
+    2300032: renyugongzhu_01
+    2300034: Sphere014
+    2300036: Sphere015
+    3300000: 23c41ff0_obj
+    3300002: 23c59828_obj
+    3300004: 23c71878_obj
+    3300006: ??
+    3300008: ????body
+    3300010: Ariel
+    3300012: bikini_elf_m00
+    3300014: default001
+    3300016: element3ds_com_M747
+    3300018: npc_16
+    3300020: Object001
+    3300022: Object01
+    3300024: Object10
+    3300026: Object41
+    3300028: PET38_a_obj1_0_
+    3300030: PET38_a_obj1_1_
+    3300032: renyugongzhu_01
+    3300034: Sphere014
+    3300036: Sphere015
+    4300000: 23c41ff0_obj
+    4300002: 23c59828_obj
+    4300004: 23c71878_obj
+    4300006: ??
+    4300008: ????body
+    4300010: Ariel
+    4300012: bikini_elf_m00
+    4300014: default001
+    4300016: element3ds_com_M747
+    4300018: npc_16
+    4300020: Object001
+    4300022: Object01
+    4300024: Object10
+    4300026: Object41
+    4300028: PET38_a_obj1_0_
+    4300030: PET38_a_obj1_1_
+    4300032: renyugongzhu_01
+    4300034: Sphere014
+    4300036: Sphere015
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
