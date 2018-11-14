@@ -43,6 +43,10 @@ public class playerController : MonoBehaviour
     public ParticleSystem wandEffect;
 
     public interactItem carryItem = null;
+
+    public Book book;
+    public bool bookL;
+    public bool bookR;
     
     void Start()
     {
@@ -62,7 +66,6 @@ public class playerController : MonoBehaviour
 
     void FixedUpdate()
     {
-
         CastFireMagic();
         CastThunderMagic();
         CastTimeMagic();
@@ -106,16 +109,10 @@ public class playerController : MonoBehaviour
             if (hit.collider.tag == "princess")
             {
 
-               // Debug.Log("Hit Princess, kiss her!");
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    
-
-                }
             }
-            else if(hit.collider.tag == "FireStone")
+            else if (hit.collider.tag == "interactItem")
             {
-                if ( carryItem!=null )
+                if (carryItem != null)
                 {
                     if (carryItem.name.Equals("FireStone"))
                     {
@@ -124,14 +121,24 @@ public class playerController : MonoBehaviour
                     }
                 }
             }
-           
+            else if (hit.collider.tag == "book") {
+                if (hitObject.name.Equals("BookR"))
+                {
+                    Debug.Log("bookR is true");
+                    bookR = true;
+                    bookL = false;
+                }
+                else if (hitObject.name.Equals("BookL")) {
+                    Debug.Log("bookL is true");
+                    bookR = false;
+                    bookL = true;
+                }
+            }
                 //Debug.Log("hit " + hit.collider.tag.ToString());
         }
         else
         {
             ClearHighlighted();
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-
         }
     }
 
@@ -150,7 +157,7 @@ public class playerController : MonoBehaviour
             {
                 ClearHighlighted();
                 originalMaterial = gameObject.GetComponent<MeshRenderer>().sharedMaterial;
-                //gameObject.GetComponent<MeshRenderer>().sharedMaterial = highlightMaterial;
+                
                 gameObject.layer = 8;
                 lastHighlightedObject = gameObject;
             }
