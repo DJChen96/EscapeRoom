@@ -122,6 +122,8 @@ ModelImporter:
     2100004: Material
     2100006: Material_002
     2100008: Material_003
+    2300000: Circle_004
+    3300000: Circle_004
     4300000: Circle_001
     4300002: Circle_004
     7400000: Default Take
