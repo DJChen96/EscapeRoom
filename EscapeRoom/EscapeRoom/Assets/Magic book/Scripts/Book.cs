@@ -12,11 +12,11 @@ public class Book : MonoBehaviour {
 	private int open, i = 0;
 	private int cls = 0, ct = 0, nm = 0;
 	private float tm;
-    public playerController pc;
+   // public playerController pc;
 	// Use this for initialization
 	void Start () {
-        if (pc == null)
-            pc = FindObjectOfType<playerController>();
+        //if (pc == null)
+            //pc = FindObjectOfType<playerController>();
         open = 1;
         i = 0;
         nm = 0;
@@ -42,7 +42,7 @@ public class Book : MonoBehaviour {
 
 		//if(open == 1)
 		{
-			if(pc.bookL&&Input.GetKeyDown(KeyCode.F))
+			if(Input.GetKeyDown(KeyCode.F))
 			{
 				if(i < Pages.Length)
 				{
@@ -54,7 +54,7 @@ public class Book : MonoBehaviour {
 					i++;
 				}
 			}
-			if(pc.bookR&&Input.GetKeyDown(KeyCode.F))
+			if(Input.GetKeyDown(KeyCode.F))
 			{
                 
 				if(i > 0)

@@ -40,7 +40,7 @@ public class gameController : MonoBehaviour {
 
         print("Hi adventurer, nice to meet you in this dark, dark room, use fire to burn the darkness!");
 
-        Debug.Log("---------FIRST PUZZLE----------");
+        
         var candles = candleGroup.GetComponentsInChildren<candle>();
         foreach (candle c in candles) {
             lit_room &= c.lit;

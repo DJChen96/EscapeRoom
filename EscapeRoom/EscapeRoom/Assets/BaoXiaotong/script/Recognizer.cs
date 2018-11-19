@@ -11,14 +11,12 @@ public class Recognizer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         keywords.Add("fire", () => { Debug.Log("Fire"); });
-        keywords.Add("thunder", () => { Debug.Log("Thunder"); });
-        keywords.Add("ice", () => { Debug.Log("Ice"); });
+        keywords.Add("water", () => { Debug.Log("Water"); });
+        keywords.Add("growth", () => { Debug.Log("Growth"); });
+        keywords.Add("time stop", () => { Debug.Log("Time stop"); });
+        keywords.Add("time start", () => { Debug.Log("Time start"); });
         keywords.Add("magic mirror on the wall", () => { Debug.Log("magic mirror on the wall"); });
-        keywords.Add("who is the fairest one of all?", () => { Debug.Log("who is the fairest one of all?"); });
-        keywords.Add("Avada Kedavra", () => { Debug.Log("Avada Kedavra");});
-        keywords.Add("Expecto patronum", () => { Debug.Log("Expecto patronum");});
-        keywords.Add("Expelliarmus", () => { Debug.Log("Expelliarmus"); });
-        
+        keywords.Add("mirror mirror on the wall", () => { Debug.Log("magic mirror on the wall"); });
 
         keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;

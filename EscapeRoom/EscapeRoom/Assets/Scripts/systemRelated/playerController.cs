@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HTC.UnityPlugin.Vive;
 
 public class playerController : MonoBehaviour
 {
@@ -179,16 +180,16 @@ public class playerController : MonoBehaviour
 
     void CastFireMagic()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !fire_inCD && ! firemode)
+
+        if (Input.GetAxis("Fire1")!=0)        
         {
-            var wand_main = wandEffect.main;
-            wand_main.startColor = new Color(255f, 58f, 0f);
+            //var wand_main = wandEffect.main;
+            //wand_main.startColor = new Color(255f, 58f, 0f);
             Debug.Log("IN FIRE MODE");
             firemode = true;
             thundermode = timemode =  false;
         }
-        if (Input.GetMouseButton(0) && !fire_inCD && firemode)
+        if ((ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger)))
         {
             fire_inCD = true;
         }
