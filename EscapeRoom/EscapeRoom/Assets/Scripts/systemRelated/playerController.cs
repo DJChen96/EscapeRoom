@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HTC.UnityPlugin.Vive;
+using Valve.VR;
 
 public class playerController : MonoBehaviour
 {
@@ -181,15 +181,8 @@ public class playerController : MonoBehaviour
     void CastFireMagic()
     {
 
-        if (Input.GetAxis("Fire1")!=0)        
-        {
-            //var wand_main = wandEffect.main;
-            //wand_main.startColor = new Color(255f, 58f, 0f);
-            Debug.Log("IN FIRE MODE");
-            firemode = true;
-            thundermode = timemode =  false;
-        }
-        if ((ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger)))
+        firemode = true;
+        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand))
         {
             fire_inCD = true;
         }

@@ -36,8 +36,8 @@ public class wandController : MonoBehaviour {
     void castingMagic() {
         if (pc.firemode)
             castingFire();
-        else if (pc.thundermode)
-            castingThunder();
+        //else if (pc.thundermode)
+        //    castingThunder();
         else if (pc.timemode)
             castingTime();
     }
@@ -47,7 +47,7 @@ public class wandController : MonoBehaviour {
         {
             if (firePrefab != null)
             {
-                Instantiate(firePrefab, transform.position, pc.transform.rotation, this.transform);
+                Instantiate(firePrefab, transform.position, transform.parent.rotation, this.transform);
                 fire_generated = true;
             }
             else
@@ -59,24 +59,24 @@ public class wandController : MonoBehaviour {
         }
     }
 
-    void castingThunder()
-    {
-        if (pc.thunder_inCD && !thunder_generated && pc.thundermode)
-        {
-            if (thunderPrefab != null)
-            {
-                print("THUNDER GENERATED");
-                Instantiate(thunderPrefab, transform.position, pc.transform.rotation, this.transform);
-                thunder_generated = true;
-            }
-            else
-                print("NULL THUNDER PREFAB");
-        }
-        else if (!pc.thunder_inCD)
-        {
-            thunder_generated = false;
-        }
-    }
+    //void castingThunder()
+    //{
+    //    if (pc.thunder_inCD && !thunder_generated && pc.thundermode)
+    //    {
+    //        if (thunderPrefab != null)
+    //        {
+    //            print("THUNDER GENERATED");
+    //            Instantiate(thunderPrefab, transform.position, transform.rotation, this.transform);
+    //            thunder_generated = true;
+    //        }
+    //        else
+    //            print("NULL THUNDER PREFAB");
+    //    }
+    //    else if (!pc.thunder_inCD)
+    //    {
+    //        thunder_generated = false;
+    //    }
+    //}
 
     void castingTime() {
         if (pc.time_triggered && !time_generated && pc.timemode)
