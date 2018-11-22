@@ -63,7 +63,7 @@ public class ClockTimeController : MonoBehaviour {
         // Carriage to Pumpkin 
         if (minutes_float > 718 || minutes_float < 2)
         {
-            pumpkinCarriageController.carriageChange();
+            pumpkinCarriageController.CarriageChange();
         }
 
     }
