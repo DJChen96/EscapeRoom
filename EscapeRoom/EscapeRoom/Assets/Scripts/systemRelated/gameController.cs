@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class gameController : MonoBehaviour {
 
+
+
     public bool princessKissed;
     public bool fireStone_Obtained;
     public bool woodStone_Obtained;
@@ -12,6 +14,9 @@ public class gameController : MonoBehaviour {
     public GameObject candleGroup;
     
     public magicCircle mc;
+
+    // @Author Xiaotong Bao
+    public static bool debugMode = true;
 
     // Use this for initialization
     void Start () {

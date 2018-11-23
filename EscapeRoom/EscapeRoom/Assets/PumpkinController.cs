@@ -10,6 +10,11 @@ public class PumpkinController : MonoBehaviour {
     void Start () {
         //StartCoroutine(Pumpkin_growth_animation());
     }
+    private void OnMouseDown()
+    {
+        if (gameController.debugMode)
+            StartCoroutine(Pumpkin_growth_animation());
+    }
 
     public void Pumpkin_growth ()
     {

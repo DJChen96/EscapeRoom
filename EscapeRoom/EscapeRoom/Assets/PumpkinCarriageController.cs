@@ -13,7 +13,13 @@ public class PumpkinCarriageController : MonoBehaviour
 
     private void Start()
     {
-       //StartCoroutine(Carriage_shrink());
+
+    }
+
+    private void OnMouseDown()
+    {
+        if (gameController.debugMode)
+            StartCoroutine(Carriage_shrink());
     }
 
     public void CarriageChange()
