@@ -17,20 +17,27 @@ public class candle : MonoBehaviour {
         gc = FindObjectOfType<gameController>();
         flame_light.gameObject.SetActive(false);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+    // Update is called once per frame
+    void Update() {
+        if (!flame.isPlaying)
+        {
+            if (lit)
+            {
+                flame.Play();
+                flame_light.gameObject.SetActive(true);
+                Collider collider = this.gameObject.GetComponent<Collider>();
+                collider.enabled = false;
+            }
+        }
 	}
    
     private void OnParticleCollision(GameObject other)
     {
         if (other.tag.Equals("FireMagic")&&!lit ) {
             lit = true;
-            gc.lit_room = true;
 
-            flame.Play();
-            flame_light.gameObject.SetActive(true);
+           
             //var lights = flame.lights;
             //lights.ratio = 0.3f;
             //lights.light = light_template;
@@ -46,4 +53,6 @@ public class candle : MonoBehaviour {
 
         }
     }
+
+    
 }

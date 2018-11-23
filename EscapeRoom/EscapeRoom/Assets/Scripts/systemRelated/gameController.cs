@@ -23,6 +23,8 @@ public class gameController : MonoBehaviour {
         //Set Parameters
         princessKissed = false;
 
+        lit_room = true;
+
         fireStone_Obtained = false;
 
         StartCoroutine(GameFlow());
@@ -53,13 +55,6 @@ public class gameController : MonoBehaviour {
         while (!lit_room) {
             yield return null;
 
-        }
-
-
-        while(!fireStone_Obtained)
-        {
-            
-            yield return null;
         }
 
         yield return new WaitForSeconds(2.0f);

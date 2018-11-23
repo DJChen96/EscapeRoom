@@ -33,11 +33,12 @@ public class fire_magic_control : MonoBehaviour {
             collision_s = child.collision;
             //trigger = child.trigger;
             //trigger.enabled = true;
-            //trigger.SetCollider(0, GameObject.Find("Dissolve").GetComponent<Transform>());
+            //trigger.SetCollider(0, GameObject.Find("Candle").GetComponent<Transform>());
             //trigger.enter = ParticleSystemOverlapAction.Callback;
             collision_s.enabled = true;
             collision_s.type = ParticleSystemCollisionType.World;
             collision_s.sendCollisionMessages = true;
+            collision_s.lifetimeLoss = 1f;
             collision_s.bounce = 0;
             collision_s.dampen = 0;
             child.tag = "FireMagic";
@@ -53,7 +54,20 @@ public class fire_magic_control : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        bool stopped = true;
+        if (childrenList != null)
+        {
+            foreach (ParticleSystem child in childrenList)
+            {
+                stopped &= child.isStopped;
+            }
+        }
+
+        stopped &= ps.isStopped;
+
+        if (stopped) {
+            GameObject.Destroy(this.transform.parent.gameObject);
+        }
     }
 
     
