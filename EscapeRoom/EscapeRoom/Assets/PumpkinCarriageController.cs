@@ -7,6 +7,7 @@ public class PumpkinCarriageController : MonoBehaviour
 
     public GameObject pumpkin;
     public GameObject small_carriage;
+
     // Use this for initialization
     private bool isRunning = false;
 
@@ -16,11 +17,7 @@ public class PumpkinCarriageController : MonoBehaviour
 
     }
 
-    private void OnMouseDown()
-    {
-        if (gameController.debugMode)
-            StartCoroutine(Carriage_shrink());
-    }
+
 
     public void CarriageChange()
     {

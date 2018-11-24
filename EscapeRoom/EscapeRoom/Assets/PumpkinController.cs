@@ -6,15 +6,12 @@ public class PumpkinController : MonoBehaviour {
 
     public GameObject big_pumkin;
     private bool isRunning = false;
+    public float waitingTime = 5f;
     // Use this for initialization
     void Start () {
         //StartCoroutine(Pumpkin_growth_animation());
     }
-    private void OnMouseDown()
-    {
-        if (gameController.debugMode)
-            StartCoroutine(Pumpkin_growth_animation());
-    }
+
 
     public void Pumpkin_growth ()
     {
@@ -44,7 +41,7 @@ public class PumpkinController : MonoBehaviour {
     }
     IEnumerator Big_Pumpkin_Destory()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(waitingTime);
         Destroy(big_pumkin.gameObject);
         Destroy(this.gameObject);
     }
