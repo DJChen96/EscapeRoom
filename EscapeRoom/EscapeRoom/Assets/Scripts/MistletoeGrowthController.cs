@@ -7,7 +7,7 @@ public class MistletoeGrowthController : MonoBehaviour {
     public GameObject small_plant;
     public GameObject big_plant;
     public GameObject finial_plant;
-    public bool enable_growth = false;
+    public bool enable_growth = true;
 
     // Use this for initialization
     private bool isRunning = false;
@@ -16,6 +16,7 @@ public class MistletoeGrowthController : MonoBehaviour {
     private void Start()
     {
         //StartCoroutine(Plant_growth());
+        
     }
 
     private void OnMouseDown()
@@ -53,5 +54,13 @@ public class MistletoeGrowthController : MonoBehaviour {
         finial_plant.SetActive(true);
         Destroy(small_plant.gameObject);
         Destroy(big_plant.gameObject);
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.tag.Equals("waterMagic")&&!isRunning) {
+            Plant_growth();
+            
+        }
     }
 }

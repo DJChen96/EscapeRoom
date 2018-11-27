@@ -10,12 +10,13 @@ public class PumpkinController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //StartCoroutine(Pumpkin_growth_animation());
+        Pumpkin_growth();
     }
 
 
     public void Pumpkin_growth ()
     {
-       StartCoroutine(Pumpkin_growth_animation());
+       //StartCoroutine(Pumpkin_growth_animation());
     }
 
     // Update is called once per frame

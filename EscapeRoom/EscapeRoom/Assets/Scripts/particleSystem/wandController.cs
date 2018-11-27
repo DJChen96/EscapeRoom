@@ -8,14 +8,16 @@ public class wandController : MonoBehaviour {
 
     public float fire_cooldown = 2.0f;
     public bool fire_inCD = false;
-    public bool firemode = true;
+    public bool fireMode = true;
 
     public float water_cooldown = 3.0f;
     public bool water_inCD = false;
-    public bool watermode = false;
+    public bool waterMode = false;
 
-    public bool timemode = false;
+    public bool timeMode = false;
     public bool time_triggered = false;
+
+    public bool growthMode = false;
 
     public playerController pc;
     public GameObject firePrefab;
@@ -26,6 +28,8 @@ public class wandController : MonoBehaviour {
 
     public GameObject timePrefab;
     public bool time_generated = false;
+
+   
 
     public GameObject cc;
     public ParticleSystem wandEffect;
@@ -69,16 +73,16 @@ public class wandController : MonoBehaviour {
     }
 
     void castingMagic() {
-        if (firemode)
+        if (fireMode)
             castingFire();
-        else if (watermode)
+        else if (waterMode)
             castingWater();
-        else if (timemode)
+        else if (timeMode)
             castingTime();
     }
 
     void castingFire() {
-        if (fire_inCD && !fire_generated && firemode)
+        if (fire_inCD && !fire_generated && fireMode)
         {
             if (firePrefab != null)
             {
@@ -96,7 +100,7 @@ public class wandController : MonoBehaviour {
 
     void castingWater()
     {
-        if (water_inCD && !water_generated && watermode)
+        if (water_inCD && !water_generated && waterMode)
         {
             if (waterPrefab != null)
             {
@@ -114,7 +118,7 @@ public class wandController : MonoBehaviour {
     }
 
     void castingTime() {
-        if (time_triggered && !time_generated && timemode)
+        if (time_triggered && !time_generated && timeMode)
         {
             if (timePrefab != null)
             {
@@ -135,7 +139,7 @@ public class wandController : MonoBehaviour {
     {
 
         //firemode = true;
-        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && firemode)
+        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && fireMode)
         {
             fire_inCD = true;
             //righthand.TriggerHapticPulse(1000);send pulse haptics
@@ -154,7 +158,7 @@ public class wandController : MonoBehaviour {
     {
 
         //watermode = true;
-        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && watermode)
+        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && waterMode)
         {
             water_inCD = true;
             //righthand.TriggerHapticPulse(1000);send pulse haptics
@@ -173,8 +177,8 @@ public class wandController : MonoBehaviour {
     {
         if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(SteamVR_Input_Sources.RightHand)&&!cc_generated)
         {
-            Quaternion q = new Quaternion(transform.parent.rotation.x,transform.parent.rotation.y,0,transform.parent.rotation.w);
-            temp = Instantiate(cc, this.transform.position+0.3f*transform.forward, q, pc.transform);
+            Quaternion q = new Quaternion(0, transform.parent.rotation.y,0,transform.parent.rotation.w);
+            temp = Instantiate(cc, this.transform.position+-1.0f*transform.right, q, pc.transform);
             
             cc_generated = true;
         }
@@ -182,10 +186,11 @@ public class wandController : MonoBehaviour {
             cc_generated = false;
             GameObject.Destroy(temp.gameObject);
             temp = null;
-            firemode = magic_mode[0];
-            watermode = magic_mode[1];
-            timemode = magic_mode[3];
-            print(firemode.ToString()+" "+watermode.ToString()+" "+timemode.ToString());
+            fireMode = magic_mode[0];
+            waterMode = magic_mode[1];
+            growthMode = magic_mode[2];
+            timeMode = magic_mode[3];
+            print(fireMode.ToString()+" "+waterMode.ToString()+" "+timeMode.ToString());
         }
 
         
@@ -208,19 +213,19 @@ public class wandController : MonoBehaviour {
     void CastTimeMagic()
     {
 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && !time_triggered && !timemode)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && !time_triggered && !timeMode)
         {
             var wand_main = wandEffect.main;
             wand_main.startColor = new Color(0f, 255f, 0f);
             Debug.Log("IN TIME MODE");
-            timemode = true;
-            firemode = false;
+            timeMode = true;
+            fireMode = false;
         }
-        if (Input.GetMouseButton(0) && !time_triggered && timemode)
+        if (Input.GetMouseButton(0) && !time_triggered && timeMode)
         {
             time_triggered = true;
         }
-        else if (Input.GetMouseButton(0) && time_triggered && timemode)
+        else if (Input.GetMouseButton(0) && time_triggered && timeMode)
         {//on CD
             time_triggered = false;
         }

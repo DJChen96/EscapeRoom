@@ -27,15 +27,18 @@ public class ObjectBrokenController : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 		
-        if (debug_triger == true && gameController.debugMode ==true)
-        {
-            Break();
-        }
 	}
     IEnumerator Broken_box_disappear()
     {
         yield return new WaitForSeconds(waitingTime);
         Destroy(brokenObj.gameObject);
         Destroy(this.gameObject);
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.tag.Equals("FireMagic")) {
+            Break();
+        }
     }
 }

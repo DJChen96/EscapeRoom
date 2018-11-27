@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fireStone : interactItem {
-
-    Animator ani;
+public class magicCrystal : interactItem {
+    
+    public int index;
 }

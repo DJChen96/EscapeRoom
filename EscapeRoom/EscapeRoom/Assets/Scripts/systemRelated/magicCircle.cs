@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class magicCircle : MonoBehaviour {
 
-    public fireStone fs;
     public bool fire = false;
     public GameObject waterStone;
 
@@ -20,7 +19,7 @@ public class magicCircle : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag.Equals("FireStone") && !fs.beingCarried) {
+        if (other.gameObject.tag.Equals("FireStone") ) {
             
             fire = true;
             Instantiate(waterStone, this.transform.position+new Vector3(0.0f,1.0f, 0.0f), this.transform.rotation);
