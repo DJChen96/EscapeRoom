@@ -30,7 +30,7 @@
 				#pragma shader_feature DEBUGUV
 				#pragma shader_feature DEBUGDISTANCEFADE
 
-				#define ENABLE_TINT 1
+				#define ENABLE_TINT 0
 				#include "UnityCG.cginc"
 				#include "Invisibility.cginc"
 			ENDCG
