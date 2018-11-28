@@ -5,6 +5,7 @@ using System;
 
 public class timeMagic : MonoBehaviour
 {
+    public ClockTimeController ctc;
     public wandController wc;
     private const float
         hoursToDegrees = 360f / 12f,

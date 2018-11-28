@@ -17,7 +17,10 @@ public class wandController : MonoBehaviour {
     public bool timeMode = false;
     public bool time_triggered = false;
 
+    public float growth_cooldown = 4.0f;
     public bool growthMode = false;
+    public bool growth_inCD = false;
+
 
     public playerController pc;
     public GameObject firePrefab;
@@ -29,7 +32,15 @@ public class wandController : MonoBehaviour {
     public GameObject timePrefab;
     public bool time_generated = false;
 
-   
+    public GameObject growthPrefab;
+    public bool growth_generated = false;
+
+    public float rotationX;
+    public float rotationY;
+    public float rotationZ;
+    public float offsetX;
+    public float offsetY;
+    public float offsetZ;
 
     public GameObject cc;
     public ParticleSystem wandEffect;
@@ -61,16 +72,13 @@ public class wandController : MonoBehaviour {
         CastFireMagic();
         CastWaterMagic();
         CastTimeMagic();
+        CastGrowthMagic();
         castingMagic();
         switchMagic();
     }
 
 
 
-    private void FixedUpdate()
-    {
-        
-    }
 
     void castingMagic() {
         if (fireMode)
@@ -79,6 +87,8 @@ public class wandController : MonoBehaviour {
             castingWater();
         else if (timeMode)
             castingTime();
+        else if (growthMode)
+            castingGrowth();
     }
 
     void castingFire() {
@@ -105,7 +115,7 @@ public class wandController : MonoBehaviour {
             if (waterPrefab != null)
             {
                 print("WATER GENERATED");
-                Instantiate(waterPrefab, transform.position, transform.parent.rotation, this.transform);
+                Instantiate(waterPrefab, transform.position + new Vector3(offsetX * 1f, offsetY * 1f, offsetZ * 1f), new Quaternion(0f, 0f, 0f, 0f), this.transform);
                 water_generated = true;
             }
             else
@@ -114,6 +124,25 @@ public class wandController : MonoBehaviour {
         else if (!water_inCD)
         {
             water_generated = false;
+        }
+    }
+
+    void castingGrowth()
+    {
+        if (growth_inCD && !growth_generated && growthMode)
+        {
+            if (growthPrefab != null)
+            {
+                print("GROWTH GENERATED");
+                Instantiate(growthPrefab, transform.position, new Quaternion(0f, 0f, 0f, 0f), this.transform);
+                growth_generated = true;
+            }
+            else
+                print("NULL GROWTH PREFAB");
+        }
+        else if (!growth_inCD)
+        {
+            growth_generated = false;
         }
     }
 
@@ -173,6 +202,23 @@ public class wandController : MonoBehaviour {
         }
     }
 
+    void CastGrowthMagic()
+    {
+        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && growthMode)
+        {
+            growth_inCD = true;
+            //righthand.TriggerHapticPulse(1000);send pulse haptics
+        }
+
+        if (growth_inCD && growth_cooldown > 0.0f)
+            growth_cooldown -= Time.deltaTime;
+        if (growth_cooldown <= 0.0f)
+        {
+            growth_cooldown = 3.0f;
+            growth_inCD = false;
+        }
+    }
+
     void switchMagic()
     {
         if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(SteamVR_Input_Sources.RightHand)&&!cc_generated)
@@ -213,19 +259,15 @@ public class wandController : MonoBehaviour {
     void CastTimeMagic()
     {
 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && !time_triggered && !timeMode)
+        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && !time_triggered && timeMode)
         {
-            var wand_main = wandEffect.main;
-            wand_main.startColor = new Color(0f, 255f, 0f);
+            //var wand_main = wandEffect.main;
+            //wand_main.startColor = new Color(0f, 255f, 0f);
             Debug.Log("IN TIME MODE");
-            timeMode = true;
-            fireMode = false;
-        }
-        if (Input.GetMouseButton(0) && !time_triggered && timeMode)
-        {
             time_triggered = true;
+            //fireMode = false;
         }
-        else if (Input.GetMouseButton(0) && time_triggered && timeMode)
+        else if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && time_triggered && timeMode)
         {//on CD
             time_triggered = false;
         }

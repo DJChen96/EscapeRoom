@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class stage3Controller : MonoBehaviour {
+public class Stage3Controller : MonoBehaviour {
 
     public MistletoeGrowthController mgc;
     public bool stage3Passed = false;

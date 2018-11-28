@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class stage2Controller : MonoBehaviour {
+public class Stage2Controller : MonoBehaviour {
 
     //Two mermaid prefab
     public GameObject mermaidSmallPre;

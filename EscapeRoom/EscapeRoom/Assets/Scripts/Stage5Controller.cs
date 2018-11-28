@@ -8,6 +8,9 @@ public class Stage5Controller : MonoBehaviour {
     public GameObject brokenObjectsAfterMirrorBreak;
     public GameObject completeObjectsAfterMirrorBreak;
     public bool debug_triger = false;
+
+    public GameObject teleportArea;
+
     // Use this for initialization
     void Start () {
 		
@@ -24,7 +27,7 @@ public class Stage5Controller : MonoBehaviour {
             Destroy(completeObjectsBeforeMirrorBreak[i]);
         }
 
-
+        teleportArea.SetActive(true);
         StartCoroutine(Broken_obj_disappear());
     }
 

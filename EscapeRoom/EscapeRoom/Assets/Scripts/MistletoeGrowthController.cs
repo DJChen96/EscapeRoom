@@ -27,8 +27,8 @@ public class MistletoeGrowthController : MonoBehaviour {
 
     public void Plant_growth()
     {
-        if (!enable_growth)
-            return;
+        //if (!enable_growth)
+        //    return;
         StartCoroutine(Plant_growth_animation());
     }
 
@@ -58,7 +58,9 @@ public class MistletoeGrowthController : MonoBehaviour {
 
     private void OnParticleCollision(GameObject other)
     {
-        if (other.tag.Equals("waterMagic")&&!isRunning) {
+        if (other.tag.Equals("GrowthMagic")&&!isRunning) {
+
+            Debug.Log("GROW");
             Plant_growth();
             
         }

@@ -7,14 +7,14 @@ public class Snitch : MonoBehaviour {
     public GameObject stone;
 	// Use this for initialization
 	void Start () {
-        StoneApear();
+        //StoneApear();
 
     }
 	
     public void StoneApear()
     {
         stone.SetActive(true);
-        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        this.gameObject.SetActive(false);
     }
 
 	// Update is called once per frame

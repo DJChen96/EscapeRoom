@@ -8,28 +8,19 @@ public class candle : MonoBehaviour {
     public bool lit;
     
     public gameController gc;
-    public Light flame_light;
+    //public Light flame_light;
 
 	// Use this for initialization
 	void Start () {
         flame = GetComponentInChildren<ParticleSystem>();
         lit = false;
         gc = FindObjectOfType<gameController>();
-        flame_light.gameObject.SetActive(false);
+        //flame_light.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update() {
-        if (!flame.isPlaying)
-        {
-            if (lit)
-            {
-                flame.Play();
-                flame_light.gameObject.SetActive(true);
-                Collider collider = this.gameObject.GetComponent<Collider>();
-                collider.enabled = false;
-            }
-        }
+        
 	}
    
     private void OnParticleCollision(GameObject other)
@@ -52,7 +43,18 @@ public class candle : MonoBehaviour {
 
 
         }
-    }
+        if (!flame.isPlaying)
+        {
+            if (lit)
+            {
+                flame.Play();
+                //flame_light.gameObject.SetActive(true);
+                 Collider collider = this.gameObject.GetComponent<Collider>();
+                collider.enabled = false;
+            }
+        }
+        }
+   }
 
     
-}
+

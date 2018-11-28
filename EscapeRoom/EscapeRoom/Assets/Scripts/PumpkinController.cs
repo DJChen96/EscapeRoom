@@ -16,7 +16,8 @@ public class PumpkinController : MonoBehaviour {
 
     public void Pumpkin_growth ()
     {
-       //StartCoroutine(Pumpkin_growth_animation());
+        if (isRunning) return;
+       StartCoroutine(Pumpkin_growth_animation());
     }
 
     // Update is called once per frame
@@ -45,5 +46,16 @@ public class PumpkinController : MonoBehaviour {
         yield return new WaitForSeconds(waitingTime);
         Destroy(big_pumkin.gameObject);
         Destroy(this.gameObject);
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.tag.Equals("GrowthMagic") && !isRunning)
+        {
+
+            Debug.Log("GROW");
+            Pumpkin_growth();
+
+        }
     }
 }
