@@ -232,6 +232,7 @@ public class wandController : MonoBehaviour {
             cc_generated = false;
             GameObject.Destroy(temp.gameObject);
             temp = null;
+            
             fireMode = magic_mode[0];
             waterMode = magic_mode[1];
             growthMode = magic_mode[2];
