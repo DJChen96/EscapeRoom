@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class magicCircle : MonoBehaviour {
-
+    
     public bool fire = false;
     public GameObject waterStone;
+    public Interactable fireStone;
 
 	// Use this for initialization
 	void Start () {

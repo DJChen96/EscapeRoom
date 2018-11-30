@@ -7,15 +7,13 @@ public class candle : MonoBehaviour {
     public ParticleSystem flame;
     public bool lit;
     
-    public gameController gc;
+    public Stage1Controller s1c;
     //public Light flame_light;
 
 	// Use this for initialization
 	void Start () {
         flame = GetComponentInChildren<ParticleSystem>();
-        lit = false;
-        gc = FindObjectOfType<gameController>();
-        //flame_light.gameObject.SetActive(false);
+        s1c = FindObjectOfType<Stage1Controller>();
     }
 
     // Update is called once per frame
@@ -27,21 +25,6 @@ public class candle : MonoBehaviour {
     {
         if (other.tag.Equals("FireMagic")&&!lit ) {
             lit = true;
-
-           
-            //var lights = flame.lights;
-            //lights.ratio = 0.3f;
-            //lights.light = light_template;
-            //lights.useParticleColor = true;
-            //lights.useRandomDistribution = true;
-            //lights.sizeAffectsRange = true;
-            //lights.alphaAffectsIntensity = true;
-            //lights.intensityMultiplier = 5.0f;
-            //lights.maxLights = 10;
-            //lights.rangeMultiplier = 2.0f;
-            //lights.enabled = true;
-
-
         }
         if (!flame.isPlaying)
         {

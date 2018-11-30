@@ -7,6 +7,9 @@ using Valve.VR.InteractionSystem;
 public class playerController : MonoBehaviour
 {
 
+    public Hand right;
+    public Hand left;
+
     public float Speed = 5f;
     public float GroundDistance = 0.2f;
     public LayerMask Ground;
@@ -49,6 +52,8 @@ public class playerController : MonoBehaviour
 
     void Start()
     {
+        right.HideController(true);
+        left.HideController(true);
         _body = GetComponent<Rigidbody>();
         _groundChecker = transform.GetChild(0);
         
@@ -69,72 +74,7 @@ public class playerController : MonoBehaviour
         //switchMagic();
     }
 
-    
-
-    //void RayCasting() {
-    //    //Raycasting part
-    //    // Bit shift the index of the layer (8) to get a bit mask
-
-    //    int layerMask = 1 << 2;
-
-    //    // This would cast rays only against colliders in layer 8.
-    //    // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
-    //    layerMask = ~layerMask;
-
-    //    RaycastHit hit;
-    //    // Does the ray intersect any objects excluding the player layer
-    //    //raycast(origin, direction, hitInfo, maxdistance, layermask, queryTriggerInteraction)   
-    //    if (Physics.SphereCast(transform.position+SC_offset, sphere_radius,transform.TransformDirection(Vector3.forward), out hit, 1.5f, layerMask))
-    //    {
-    //        //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-           
-
-    //        GameObject hitObject = hit.collider.gameObject;
-    //        HighlightObject(hitObject);
-
-    //        if (hit.collider.tag == "princess")
-    //        {
-
-    //        }
-    //        else if (hit.collider.tag == "interactItem")
-    //        {
-    //            if (carryItem != null)
-    //            {
-    //                if (carryItem.name.Equals("FireStone"))
-    //                {
-    //                    Debug.Log("Obtained fireStone");
-    //                    gc.fireStone_Obtained = true;
-    //                }
-    //            }
-    //        }
-    //        else if (hit.collider.tag == "book") {
-    //            if (hitObject.name.Equals("BookR"))
-    //            {
-    //                Debug.Log("bookR is true");
-    //                bookR = true;
-    //                bookL = false;
-    //            }
-    //            else if (hitObject.name.Equals("BookL")) {
-    //                Debug.Log("bookL is true");
-    //                bookR = false;
-    //                bookL = true;
-    //            }
-    //        }
-    //            //Debug.Log("hit " + hit.collider.tag.ToString());
-    //    }
-    //    else
-    //    {
-    //        ClearHighlighted();
-    //    }
-    //}
-
-    //void OnDrawGizmosSelected()
-    //{
-    //    // Draw a yellow sphere at the transform's position
-    //    Gizmos.color = Color.yellow;
-    //    Gizmos.DrawSphere(transform.position, sphere_radius);
-    //}
-
+   
     void HighlightObject(GameObject gameObject)
     {
         if (lastHighlightedObject != gameObject)
