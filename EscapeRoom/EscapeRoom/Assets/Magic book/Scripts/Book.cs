@@ -137,12 +137,7 @@ public class Book : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.D))
         {
             NextPage();
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha1))
-        {
-            PrePage();
-        }
-        
+        }        
 
     }
 }
