@@ -67,6 +67,12 @@ public class wandController : MonoBehaviour {
 
     GameObject temp;
 
+    // @Author Xiaotong Bao
+    public AudioClip[] MagicClips;
+    public SoundEffectAudioSource MagicAudioSource;
+
+
+
     // Use this for initialization
     void Start () {
 
@@ -113,6 +119,8 @@ public class wandController : MonoBehaviour {
             {
                 Instantiate(firePrefab, transform.position, transform.parent.rotation, this.transform);
                 fire_generated = true;
+                // @Author Xiaotong Bao
+                MagicAudioSource.Play(MagicClips[0]);
             }
             else
                 print("NULL FIRE PREFAB");
@@ -133,6 +141,8 @@ public class wandController : MonoBehaviour {
                 //Instantiate(waterPrefab, transform.position + new Vector3(offsetX * 1f, offsetY * 1f, offsetZ * 1f), new Quaternion(0f, 0f, 0f, 0f), this.transform);
                 waterPrefab.Play();
                 water_generated = true;
+                // @Author Xiaotong Bao
+                MagicAudioSource.Play(MagicClips[1]);
             }
             else
                 print("NULL WATER PREFAB");
@@ -152,6 +162,8 @@ public class wandController : MonoBehaviour {
                 print("GROWTH GENERATED");
                 Instantiate(growthPrefab, transform.position, new Quaternion(0f, 0f, 0f, 0f), this.transform);
                 growth_generated = true;
+                // @Author Xiaotong Bao
+                MagicAudioSource.Play(MagicClips[2]);
             }
             else
                 print("NULL GROWTH PREFAB");
@@ -171,6 +183,8 @@ public class wandController : MonoBehaviour {
                 //Instantiate(timePrefab, transform.position + 5.0f*transform.forward + 5.0f*transform.up, pc.transform.rotation);
                 timePrefab.SetActive(true);
                 time_generated = true;
+                // @Author Xiaotong Bao
+                MagicAudioSource.Play(MagicClips[3]);
             }
             else
                 print("NULL TIME PREFAB");

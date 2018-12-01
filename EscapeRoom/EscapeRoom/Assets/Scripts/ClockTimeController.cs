@@ -13,11 +13,16 @@ public class ClockTimeController : MonoBehaviour {
     public float deltaMinutes;
     public bool controlled = false;
 
+    
+
     private float pendulu_max_degree = 10;
     private float pendulu_speed = 10;
     private float pendulu_degree = 0;
     private int pendulu_direction = 1;
     private Vector3 cenre_position;
+
+    public AudioClip bellAudioClip;
+    public SoundEffectAudioSource soundEffectAudioSource;
 
     public void SetTime(float given_minutes_float)
     {
@@ -84,6 +89,7 @@ public class ClockTimeController : MonoBehaviour {
         if (minutes_float > 718 || minutes_float < 2)
         {
             pumpkinCarriageController.CarriageChange();
+            soundEffectAudioSource.Play(bellAudioClip);
         }
     }
 }

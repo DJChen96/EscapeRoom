@@ -35,8 +35,8 @@ public class PumpkinCarriageController : MonoBehaviour
         isRunning = true;
         while (true)
         {
-            this.transform.localScale = Vector3.Lerp(this.transform.localScale, small_carriage.transform.localScale, Time.deltaTime * 0.5f);
-            this.transform.position = Vector3.Lerp(this.transform.position, small_carriage.transform.position, Time.deltaTime * 0.5f);
+            this.transform.localScale = Vector3.Lerp(this.transform.localScale, small_carriage.transform.localScale, Time.deltaTime * 0.2f);
+            this.transform.position = Vector3.Lerp(this.transform.position, small_carriage.transform.position, Time.deltaTime * 0.2f);
             yield return null;
             if (Vector3.Distance(this.transform.localScale, small_carriage.transform.localScale) +
                 Vector3.Distance(this.transform.position, small_carriage.transform.position) < 0.5f)

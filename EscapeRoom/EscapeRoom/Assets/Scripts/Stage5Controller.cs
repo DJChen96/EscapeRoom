@@ -8,6 +8,8 @@ public class Stage5Controller : MonoBehaviour {
     public GameObject brokenObjectsAfterMirrorBreak;
     public GameObject completeObjectsAfterMirrorBreak;
     public bool debug_triger = false;
+    public AudioClip breakAudioClip;
+    public SoundEffectAudioSource soundEffectAudioSource;
 
     public GameObject teleportArea;
 
@@ -18,7 +20,7 @@ public class Stage5Controller : MonoBehaviour {
 
     public void MirrorBreak ()
     {
-
+        soundEffectAudioSource.Play(breakAudioClip);
         brokenObjectsAfterMirrorBreak.SetActive(true);
         completeObjectsAfterMirrorBreak.SetActive(true);
 

@@ -7,24 +7,34 @@ public class PumpkinController : MonoBehaviour {
     public GameObject big_pumkin;
     private bool isRunning = false;
     public float waitingTime = 5f;
+    public SoundEffectAudioSource soundEffectAudioSource;
+    public AudioClip audio;
+    public bool debug_triger = false;
+
+    private bool breaked = false;
     // Use this for initialization
     void Start () {
         //StartCoroutine(Pumpkin_growth_animation());
-        Pumpkin_growth();
+        //Pumpkin_growth();
     }
 
 
     public void Pumpkin_growth ()
     {
         if (isRunning) return;
-       StartCoroutine(Pumpkin_growth_animation());
+       StartCoroutine(Pumpkin_growth_animation(soundEffectAudioSource, audio));
     }
 
     // Update is called once per frame
     void Update () {
-		
-	}
-    IEnumerator Pumpkin_growth_animation()
+
+        if (debug_triger == true && gameController.debugMode == true)
+        {
+            Pumpkin_growth();
+        }
+
+    }
+    IEnumerator Pumpkin_growth_animation(SoundEffectAudioSource soundEffectAudioSource, AudioClip audio)
     {
         isRunning = true;
         while (true)
@@ -37,8 +47,11 @@ public class PumpkinController : MonoBehaviour {
                 break;
         }
         isRunning = false;
+
+        soundEffectAudioSource.Play(audio);
         big_pumkin.SetActive(true);
         StartCoroutine(Big_Pumpkin_Destory());
+        this.gameObject.GetComponent<Collider>().enabled = false;
         this.gameObject.GetComponent<Renderer>().enabled = false;
     }
     IEnumerator Big_Pumpkin_Destory()

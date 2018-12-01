@@ -6,6 +6,7 @@ using UnityEngine;
 public class InvisibilityCloakingController : MonoBehaviour {
     public Material dissolveMaterial;
     public GameObject[] seed_box;
+    public GameObject Cloak;
 
     private int shaderProperty;
     // Use this for initialization
@@ -21,7 +22,7 @@ public class InvisibilityCloakingController : MonoBehaviour {
 
     private void Visible_and_disappear()
     {
-        this.gameObject.GetComponent<Renderer>().material = dissolveMaterial;
+        Cloak.GetComponent<Renderer>().material = dissolveMaterial;
         for (int i = 0; i < seed_box.Length; i ++) {
             seed_box[i].SetActive(true);
         }
@@ -43,7 +44,7 @@ public class InvisibilityCloakingController : MonoBehaviour {
         while (cutoff < 1)
         {
             cutoff += Time.deltaTime * 0.5f;
-            this.gameObject.GetComponent<Renderer>().material.SetFloat(shaderProperty, cutoff);
+            Cloak.GetComponent<Renderer>().material.SetFloat(shaderProperty, cutoff);
             yield return null;
         }
         Destroy(this.gameObject);

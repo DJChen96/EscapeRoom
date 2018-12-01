@@ -10,6 +10,9 @@ public class SwordController : MonoBehaviour {
     public GameObject theElderWand;
     private bool movingSword = false;
 
+    public AudioClip sowrdAudioClip;
+    public SoundEffectAudioSource soundEffectAudioSource;
+
     // Use this for initialization
     void Start () {
 		
@@ -22,13 +25,14 @@ public class SwordController : MonoBehaviour {
         {
             this.gameObject.layer = 2;
             this.transform.position = Vector3.Lerp(this.transform.position, swordOnHand.transform.position, Time.deltaTime * 2f);
-            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, swordOnHand.transform.rotation, Time.deltaTime * 1.5f);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, swordOnHand.transform.rotation, Time.deltaTime * 1.7f);
 
             if (Vector3.Distance(this.transform.position, swordOnHand.transform.position) < 0.1f && Quaternion.Angle(this.transform.rotation, swordOnHand.transform.rotation) < 1)
             {
                 movingSword = false;
                 swordOnHand.SetActive(true);
                 theElderWand.SetActive(false);
+
                 Destroy(this.gameObject);
                 //this.gameObject.SetActive(false);
             }
@@ -44,6 +48,7 @@ public class SwordController : MonoBehaviour {
             {
                 Debug.Log("GRAB PRESSED");
                 movingSword = true;
+                soundEffectAudioSource.Play(sowrdAudioClip);
             }
         }
     }
