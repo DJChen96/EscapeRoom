@@ -7,7 +7,8 @@ public class magicCircle : MonoBehaviour {
     
     public bool fire = false;
     public GameObject waterStone;
-    public Interactable fireStone;
+    //public Interactable fireStone;
+    public ParticleSystem ps;
 
 	// Use this for initialization
 	void Start () {
@@ -16,16 +17,21 @@ public class magicCircle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+        //Check particle see if it is about to die.
+        if (!ps.IsAlive(true)) {
+            Destroy(this.gameObject);
+        }	
 	}
 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag.Equals("FireStone") ) {
-            
-            fire = true;
-            Instantiate(waterStone, this.transform.position+new Vector3(0.0f,1.0f, 0.0f), this.transform.rotation);
-            Destroy(this.gameObject);
+            //fire = true;
+            //Instantiate(waterStone, this.transform.position+new Vector3(0.0f,1.0f, 0.0f), this.transform.rotation, this.transform.parent);
+            if(!waterStone.activeInHierarchy)
+                waterStone.SetActive(true);
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         }
     }
 }

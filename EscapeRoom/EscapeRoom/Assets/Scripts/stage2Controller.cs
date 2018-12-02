@@ -13,6 +13,8 @@ public class Stage2Controller : MonoBehaviour
     public GameObject bubble;
     //public GameObject MermaidMorph;
 
+    
+
     public AudioClip[] mermailAudios;
 
     private bool mermaidWatered = false;
@@ -147,6 +149,7 @@ public class Stage2Controller : MonoBehaviour
             if (other.tag.Equals("splitPotion"))
             {
                 Debug.Log("Oh nice. I shall give you this");
+                //Using animation here too, instead of instantiating a new crystal;
                 //Instantiate(growthStone, this.transform.position, new Quaternion(90f, 0, 0, 0));
 
 

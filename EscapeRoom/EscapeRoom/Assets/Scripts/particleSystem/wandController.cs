@@ -23,6 +23,7 @@ public class wandController : MonoBehaviour {
     public float water_cooldown = 2.0f;
     public bool water_inCD = false;
     public bool waterMode = false;
+    public bool waterEnabled = false;
 
     public bool timeMode = false;
     public bool time_triggered = false;
@@ -102,8 +103,9 @@ public class wandController : MonoBehaviour {
     }
 
     void castingMagic() {
-        if (fireMode)
-            castingFire();
+        if (fireMode) {
+        }
+        //castingFire();
         else if (waterMode)
             castingWater();
         else if (timeMode)
@@ -113,43 +115,45 @@ public class wandController : MonoBehaviour {
     }
 
     void castingFire() {
-        if (fire_inCD && !fire_generated && fireMode)
+        if (fire_inCD )
         {
             if (firePrefab != null)
             {
-                Instantiate(firePrefab, transform.position, transform.parent.rotation, this.transform);
+                
                 fire_generated = true;
-                // @Author Xiaotong Bao
-                MagicAudioSource.Play(MagicClips[0]);
+                
             }
             else
                 print("NULL FIRE PREFAB");
         }
         else if (!fire_inCD)
         {
-            fire_generated = false;
+            
         }
     }
 
     void castingWater()
     {
-        if (water_inCD && !water_generated && waterMode)
+        if (waterEnabled)
         {
-            if (waterPrefab != null)
+            if (water_inCD && !water_generated && waterMode)
             {
-                print("WATER GENERATED");
-                //Instantiate(waterPrefab, transform.position + new Vector3(offsetX * 1f, offsetY * 1f, offsetZ * 1f), new Quaternion(0f, 0f, 0f, 0f), this.transform);
-                waterPrefab.Play();
-                water_generated = true;
-                // @Author Xiaotong Bao
-                MagicAudioSource.Play(MagicClips[1]);
+                if (waterPrefab != null)
+                {
+                    print("WATER GENERATED");
+                    //Instantiate(waterPrefab, transform.position + new Vector3(offsetX * 1f, offsetY * 1f, offsetZ * 1f), new Quaternion(0f, 0f, 0f, 0f), this.transform);
+                    waterPrefab.Play();
+                    water_generated = true;
+                    // @Author Xiaotong Bao
+                    MagicAudioSource.Play(MagicClips[1]);
+                }
+                else
+                    print("NULL WATER PREFAB");
             }
-            else
-                print("NULL WATER PREFAB");
-        }
-        else if (!water_inCD)
-        {
-            water_generated = false;
+            else if (!water_inCD)
+            {
+                water_generated = false;
+            }
         }
     }
 
@@ -197,20 +201,23 @@ public class wandController : MonoBehaviour {
 
     void CastFireMagic()
     {
-
+        
         //firemode = true;
-        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && fireMode)
+        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && fireMode && !fire_generated)
         {
             fire_inCD = true;
+            Instantiate(firePrefab, transform.position, transform.parent.rotation, this.transform);
+            // @Author Xiaotong Bao
+            MagicAudioSource.Play(MagicClips[0]);
             //righthand.TriggerHapticPulse(1000);send pulse haptics
         }
-
         if (fire_inCD && fire_cooldown > 0.0f)
             fire_cooldown -= Time.deltaTime;
         if (fire_cooldown <= 0.0f)
         {
             fire_cooldown = 2.0f;
             fire_inCD = false;
+            fire_generated = false;
         }
     }
 
