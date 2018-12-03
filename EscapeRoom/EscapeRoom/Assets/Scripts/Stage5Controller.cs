@@ -7,6 +7,7 @@ public class Stage5Controller : MonoBehaviour {
     public GameObject[] completeObjectsBeforeMirrorBreak;
     public GameObject brokenObjectsAfterMirrorBreak;
     public GameObject completeObjectsAfterMirrorBreak;
+    public GameObject swordBreak;
     public bool debug_triger = false;
     public AudioClip breakAudioClip;
     public SoundEffectAudioSource soundEffectAudioSource;
@@ -23,7 +24,7 @@ public class Stage5Controller : MonoBehaviour {
         soundEffectAudioSource.Play(breakAudioClip);
         brokenObjectsAfterMirrorBreak.SetActive(true);
         completeObjectsAfterMirrorBreak.SetActive(true);
-
+        if (swordBreak) swordBreak.SetActive(true);
         for (int i=0; i < completeObjectsBeforeMirrorBreak.Length; i++)
         {
             Destroy(completeObjectsBeforeMirrorBreak[i]);

@@ -13,8 +13,6 @@ public class Stage2Controller : MonoBehaviour
     public GameObject bubble;
     //public GameObject MermaidMorph;
 
-    
-
     public AudioClip[] mermailAudios;
 
     private bool mermaidWatered = false;
@@ -79,6 +77,8 @@ public class Stage2Controller : MonoBehaviour
 
         if (MermaidDispearSet[0] == 2)
         {
+            audioSource.clip = mermailAudios[3];
+            audioSource.Play();
             bubble.SetActive(true);
             mermaidBigPre.SetActive(false);
             growthStone.SetActive(true);
@@ -89,7 +89,7 @@ public class Stage2Controller : MonoBehaviour
 
 
 
-        if (gameController.debugMode == false)
+        if (gameController.debugMode == false||true)
             return;
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
@@ -135,8 +135,7 @@ public class Stage2Controller : MonoBehaviour
         audioSource.clip = mermailAudios[0];
         audioSource.Play();
         mermaidWatered = true;
-        audioSource.clip = mermailAudios[3];
-        audioSource.Play();
+
     }
 
 
@@ -149,9 +148,9 @@ public class Stage2Controller : MonoBehaviour
             if (other.tag.Equals("splitPotion"))
             {
                 Debug.Log("Oh nice. I shall give you this");
-                //Using animation here too, instead of instantiating a new crystal;
                 //Instantiate(growthStone, this.transform.position, new Quaternion(90f, 0, 0, 0));
-
+                audioSource.clip = mermailAudios[4];
+                audioSource.Play();
 
                 MermaidDispearSet[0] = 1;
   

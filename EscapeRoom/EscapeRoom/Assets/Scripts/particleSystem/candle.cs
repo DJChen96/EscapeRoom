@@ -9,6 +9,7 @@ public class candle : MonoBehaviour {
     public bool added = false;//This is the variable to tell game controller that if it is already counted into the light intensity or not.
     
     public Stage1Controller s1c;
+
     //public Light flame_light;
 
 	// Use this for initialization
