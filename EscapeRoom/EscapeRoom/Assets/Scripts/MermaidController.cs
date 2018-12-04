@@ -92,7 +92,7 @@ public class MermaidController : MonoBehaviour
 
 
 
-        if (gameController.debugMode == false)
+        if (gameController.debugMode == false || true)
             return;
 
         if (Input.GetKeyUp(KeyCode.Alpha1))

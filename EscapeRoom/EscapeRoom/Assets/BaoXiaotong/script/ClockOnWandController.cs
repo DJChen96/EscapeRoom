@@ -10,7 +10,9 @@ public class ClockOnWandController : MonoBehaviour {
     public Transform minute_hand;
 
     public float minutes_float = 690;
+    public GameObject sphere;
 
+    private float pre_minutes_float =  -1;
     // Use this for initialization
     void Start()
     {
@@ -28,9 +30,19 @@ public class ClockOnWandController : MonoBehaviour {
 
 
     // Update is called once per frame
+    float timePass = 0;
     void Update()
     {
+        timePass = timePass + Time.deltaTime;
         SetTime(clockTimeController.minutes_float);
+        if (pre_minutes_float != -1)
+        {
+            float minutes_pass = clockTimeController.minutes_float - pre_minutes_float;
+            sphere.GetComponent<Renderer>().material.
+                SetTextureOffset("_MainTex", new Vector2(minutes_pass * -0.8f, timePass * 0.2f));
+
+        }
+        pre_minutes_float = minutes_float;
     }
 
 }

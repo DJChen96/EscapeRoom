@@ -33,6 +33,7 @@ public class TimeMagic : MonoBehaviour
     public float deltaEuler;
     public ClockTimeController clockPrefab;//This is the clock controlled on the wall;
 
+    public GameObject theClockOnWand;
     public float minutes_float;
 
 
@@ -52,7 +53,7 @@ public class TimeMagic : MonoBehaviour
     {
         if (wc.timeMode)
         {
-           
+            theClockOnWand.SetActive(false);
             if (wc.time_triggered)
             {
 
@@ -107,8 +108,8 @@ public class TimeMagic : MonoBehaviour
 
     public void Uncontrolled()
     {
-  
         clockPrefab.controlled = false;
+        theClockOnWand.SetActive(false);
     }
 
 

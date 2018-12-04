@@ -65,15 +65,20 @@ public class ClockTimeController : MonoBehaviour
         minute_hand.transform.RotateAround(centre_position, new Vector3(0, 0, 1), 103);
     }
 
+    bool CarriageInScene = true;
+
+
+
     void Clock_Rotation()
     {
         // Carriage to Pumpkin 
-        if ((minutes_float > 718 || minutes_float < 2))
+        if ((minutes_float > 718 || minutes_float < 2) && CarriageInScene)
         {
             if (pumpkinCarriageController)
                 pumpkinCarriageController.CarriageChange();
             if (soundEffectAudioSource && bellAudioClip)
                 soundEffectAudioSource.Play(bellAudioClip);
+            CarriageInScene = false;
         }
 
         minutes_float += Time.deltaTime / 60;

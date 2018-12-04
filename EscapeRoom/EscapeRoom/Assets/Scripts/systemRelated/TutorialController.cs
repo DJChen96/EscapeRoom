@@ -44,6 +44,8 @@ public class TutorialController : MonoBehaviour {
 	void Update () {
         if (!audioPlayed && state >= 0)
         {
+            print("tutorialAudioArray_state = " + state);
+
             audioSource.clip = tutorialAudioArray[state];
             audioSource.Play();
             audioPlayed = true;
@@ -84,6 +86,7 @@ public class TutorialController : MonoBehaviour {
                 {
                     state_change = true;
                     state = 2;
+                    print("state = " + state);
                 }
                 break;
 
@@ -184,34 +187,8 @@ public class TutorialController : MonoBehaviour {
         }
 
         // Debug
-        if (gameController.debugMode == false|| true)
+        if (gameController.debugMode == false)
             return;
-
-        if (Input.GetKeyUp(KeyCode.Alpha1))
-        {
-            state = 1;
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha2))
-        {
-            state = 2;
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha3))
-        {
-            state = 3;
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha4))
-        {
-            state = 4;
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha5))
-        {
-            state = 5;
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha6))
-        {
-            state = 6;
-            
-        }
 
         
     }

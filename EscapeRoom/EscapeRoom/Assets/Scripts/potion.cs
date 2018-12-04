@@ -30,7 +30,7 @@ public class potion : MonoBehaviour {
 
 
             // @Author Xiaotog Bao
-            //potionSpeaker.Play();
+            potionSpeaker.Play();
             cap.SetActive(false);
             flowingTime = flowingTime + Time.deltaTime;
         }
@@ -38,6 +38,7 @@ public class potion : MonoBehaviour {
         {
             cap.SetActive(true);
             flowingTime = 0;
+            potionSpeaker.Stop();
             ps.Stop();
         }
         else{
@@ -45,7 +46,7 @@ public class potion : MonoBehaviour {
             ps.Stop();
 
             // @Author Xiaotog Bao
-            //potionSpeaker.Stop();
+            potionSpeaker.Stop();
             cap.SetActive(true);
 
         }
