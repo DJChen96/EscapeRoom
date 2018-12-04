@@ -5,7 +5,7 @@ using UnityEngine;
 public class Stage3Controller : MonoBehaviour {
 
     public MistletoeGrowthController mgc;
-    public bool stage3Passed = false;
+    public MagicCrystal timeCrystal;
 
 
 	// Use this for initialization
@@ -22,7 +22,7 @@ public class Stage3Controller : MonoBehaviour {
     {
         if (other.tag.Equals("growthMagic")) {
             mgc.Plant_growth();
-            stage3Passed = true;
+           
         }
     }
 }

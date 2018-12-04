@@ -32,6 +32,7 @@ public class magicCircle : MonoBehaviour {
             if(!waterStone.activeInHierarchy)
                 waterStone.SetActive(true);
             ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            Destroy(other.gameObject);
         }
     }
 }

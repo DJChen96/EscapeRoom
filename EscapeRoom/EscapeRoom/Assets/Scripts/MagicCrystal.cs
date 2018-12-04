@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class MagicCrystal : MonoBehaviour {
 
-    [Tooltip("The index of the magic in the magic array")]
+    //[Tooltip("The index of the magic in the magic array")]
     public int index;
+
+    private Book book;
+    private MirrorController mirrorController;
 
     public bool absorbed = false;
     public ParticleSystem deadEffect;
@@ -18,25 +21,41 @@ public class MagicCrystal : MonoBehaviour {
 	void Start () {
         shaderProperty = Shader.PropertyToID("_cutoff");
         wc = FindObjectOfType<wandController>();
-        
+        book = FindObjectOfType<Book>();
+        mirrorController = FindObjectOfType<MirrorController>();
+
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void OnDestroy()
+    {
+        book.SetStage(index + 2);
+        mirrorController.SetStage(index + 2);
+    }
+    // Update is called once per frame
+    void Update () {
         
 	}
 
-    public void AbsorbMagic()
+    public void AbsorbMagic(float waitTime)
     {
         //Animation will invoke this method so that it will start coroutine to destroy crystal.
-
-        StartCoroutine(CrystalDissolve());
+        StartCoroutine(CrystalDissolve(waitTime));
     }
 
-    IEnumerator CrystalDissolve()
+    IEnumerator CrystalDissolve(float waitTime)
     {
+        yield return new WaitForSeconds(waitTime);
+        //absorbed = true;
+        if(index == 0)
+            wc.waterEnabled = true;
 
-        absorbed = true;
+        else if (index == 1)
+            wc.growthEnabled = true;
+
+        else if (index == 2)
+            wc.timeEnabled = true;
+
         deadEffect.Play();
 
         this.GetComponent<Renderer>().material = dissolve;

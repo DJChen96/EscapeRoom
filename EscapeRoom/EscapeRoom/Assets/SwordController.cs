@@ -13,16 +13,31 @@ public class SwordController : MonoBehaviour {
     public AudioClip sowrdAudioClip;
     public SoundEffectAudioSource soundEffectAudioSource;
 
+    private Book book;
+    private MirrorController mirrorController;
     // Use this for initialization
     void Start () {
-		
-	}
+        book = FindObjectOfType<Book>();
+        mirrorController = FindObjectOfType<MirrorController>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
+        if (this.GetComponent<Interactable>().isHovering)
+        {
+            Debug.Log("LeftController Got");
+            if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
+            {
+                Debug.Log("GRAB PRESSED");
+                movingSword = true;
+                soundEffectAudioSource.Play(sowrdAudioClip);
+            }
+        }
+
         if (movingSword)
         {
+            this.GetComponent<Interactable>().highlightOnHover = true;
             this.gameObject.layer = 2;
             this.transform.position = Vector3.Lerp(this.transform.position, swordOnHand.transform.position, Time.deltaTime * 2f);
             this.transform.rotation = Quaternion.Lerp(this.transform.rotation, swordOnHand.transform.rotation, Time.deltaTime * 1.7f);
@@ -32,6 +47,9 @@ public class SwordController : MonoBehaviour {
                 movingSword = false;
                 swordOnHand.SetActive(true);
                 theElderWand.SetActive(false);
+
+                book.SetStage(5);
+                mirrorController.SetStage(5);
 
                 Destroy(this.gameObject);
                 //this.gameObject.SetActive(false);
@@ -43,13 +61,7 @@ public class SwordController : MonoBehaviour {
     {
         if (other.gameObject.tag.Equals("LeftController") )
         {
-            Debug.Log("LeftController Got");
-            if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
-            {
-                Debug.Log("GRAB PRESSED");
-                movingSword = true;
-                soundEffectAudioSource.Play(sowrdAudioClip);
-            }
+            
         }
     }
 }

@@ -13,13 +13,13 @@ public class Growth_Magic_Control : MonoBehaviour {
         //print("SUCCESSFULLY INSTANSTIATED");
         ps = GetComponent<ParticleSystem>();
 
-        ps.tag = "growthMagic";
+        ps.tag = "GrowthMagic";
 
         childrenList = GetComponentsInChildren<ParticleSystem>();
         foreach (ParticleSystem child in childrenList)
         {
 
-            child.tag = "growthMagic";
+            child.tag = "GrowthMagic";
 
         }
 

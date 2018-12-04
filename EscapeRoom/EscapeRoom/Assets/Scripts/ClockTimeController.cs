@@ -72,8 +72,8 @@ public class ClockTimeController : MonoBehaviour
         {
             if (pumpkinCarriageController)
                 pumpkinCarriageController.CarriageChange();
-
-            soundEffectAudioSource.Play(bellAudioClip);
+            if (soundEffectAudioSource && bellAudioClip)
+                soundEffectAudioSource.Play(bellAudioClip);
         }
 
         minutes_float += Time.deltaTime / 60;

@@ -21,26 +21,33 @@ public class potion : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        
-        
+
+
+      
         if (Vector3.Angle(this.transform.up,new Vector3(0,1,0))>90.0f && flowingTime < MAX_flowingTime) {
             
             ps.Play();
 
 
             // @Author Xiaotog Bao
-            potionSpeaker.Play();
+            //potionSpeaker.Play();
             cap.SetActive(false);
             flowingTime = flowingTime + Time.deltaTime;
+        }
+        else if (Vector3.Angle(this.transform.up, new Vector3(0, 1, 0)) <= 90.0f)
+        {
+            cap.SetActive(true);
+            flowingTime = 0;
+            ps.Stop();
         }
         else{
             
             ps.Stop();
 
             // @Author Xiaotog Bao
-            potionSpeaker.Stop();
+            //potionSpeaker.Stop();
             cap.SetActive(true);
-            flowingTime = 0;
-}
+
+        }
     }
 }

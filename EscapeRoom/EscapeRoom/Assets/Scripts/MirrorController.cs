@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
+using Valve.VR.InteractionSystem;
 
 public class MirrorController : MonoBehaviour {
 
@@ -11,7 +13,7 @@ public class MirrorController : MonoBehaviour {
     public Transform mirror_head_disappear;
     public LipSync lipSync;
 
-    private int stage = 0;
+    private int stage = 1;
     public bool speaking = false;
 
     public bool isRunning = false;
@@ -36,7 +38,6 @@ public class MirrorController : MonoBehaviour {
         if (stage == 0 || stage > 5)
             return;
 
-        
         HeadAppear = true;
         
     }
@@ -45,6 +46,17 @@ public class MirrorController : MonoBehaviour {
     // Update is called once per frame
     private float mask_mouth_moving_time = 0;
 	void Update () {
+        if (this.gameObject.GetComponentInChildren<Interactable>().isHovering)
+        {
+            //Debug.Log("____________mirror" + "_________________");
+            if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
+            {
+                MirrorSpeak();
+            }
+        }
+
+
+
         if (!lipSync.IsPlaying && speaking && !HeadAppear)
         {
             HeadDisappear = true;
@@ -99,4 +111,6 @@ public class MirrorController : MonoBehaviour {
             SetStage(5);
         }
     }
+
+    
 }

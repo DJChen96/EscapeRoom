@@ -1,25 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class TutorialController : MonoBehaviour {
+
+    public GameObject teleport_t;
 
     public GameObject player;
     public AudioClip[] tutorialAudioArray;
     public AudioSource audioSource;
+
+    public Vector3 playerOrigin;
 
     public bool audioPlayed = true;
     public bool audioPlaying = false;
     public int state =-1;
     private bool state_change = true;
 
+    public wandController wc;
+
     public FadeCamera fadeCamera;
     public GameObject TutorialStage; 
     public GameObject[] arrowList;
     public GameObject[] controllerList;
+
+    public Interactable apple;
+   
+    public Candle candle;
+   
+    public int[] status;
+
+    bool s1passed = false;
     // Use this for initialization
     void Start () {
-		
+        if (wc == null) {
+            wc = FindObjectOfType<wandController>();
+        }
+       
 	}
 	
 	// Update is called once per frame
@@ -38,15 +56,11 @@ public class TutorialController : MonoBehaviour {
             audioPlaying = false;
         }
 
-
-
-
         switch (state)
         {
             case 0:
                 // Hey there, welcome to the magic escape room, we are not responsible for severed, 
                 // exploded or lost body parts. 
-
                 audioPlayed = state_change ?  false : audioPlayed;
                 audioPlaying = state_change ? true : audioPlaying;
                 state_change = state_change ? false : state_change;
@@ -80,8 +94,10 @@ public class TutorialController : MonoBehaviour {
                 state_change = state_change ? false : state_change;
 
                 arrowList[0].SetActive(true);
-
-                if (!audioPlaying)
+                if (apple.attachedToHand != null) {
+                    s1passed = (apple.attachedToHand.handType == Valve.VR.SteamVR_Input_Sources.LeftHand)? true : false;
+                }
+                if (!audioPlaying && s1passed)
                 {
                     arrowList[0].SetActive(false);
                     state_change = true;
@@ -93,17 +109,19 @@ public class TutorialController : MonoBehaviour {
                 // Use your wand to move around. 
                 audioPlayed = state_change ? false : audioPlayed;
                 audioPlaying = state_change ? true : audioPlaying;
+                playerOrigin = state_change ? player.transform.position : playerOrigin;//Record the position at the first frame
                 state_change = state_change ? false : state_change;
 
                 arrowList[1].SetActive(true);
 
-                if (!audioPlaying)
+                if (!audioPlaying && playerOrigin  != null && Vector3.Distance(player.transform.position,playerOrigin)>0.1f)
                 {
                     arrowList[1].SetActive(false);
                     state_change = true;
                     state = 4;
                 }
                 break;
+
             case 4:
                 // you need to use the Grip to switch to the fire magic mode.
                 audioPlayed = state_change ? false : audioPlayed;
@@ -112,7 +130,8 @@ public class TutorialController : MonoBehaviour {
 
                 arrowList[3].SetActive(true);
                 arrowList[4].SetActive(true);
-                if (!audioPlaying)
+
+                if (!audioPlaying && wc.fireMode)
                 {
                     arrowList[3].SetActive(false);
                     arrowList[4].SetActive(false);
@@ -120,6 +139,7 @@ public class TutorialController : MonoBehaviour {
                     state = 5;
                 }
                 break;
+
             case 5:
                 // Now, lit the candle, using what you’ve just learned.
                 audioPlayed = state_change ? false : audioPlayed;
@@ -127,12 +147,17 @@ public class TutorialController : MonoBehaviour {
                 state_change = state_change ? false : state_change;
 
                 arrowList[2].SetActive(true);
-                if (!audioPlaying)
+
+                if (!audioPlaying && candle.lit)
                 {
                     arrowList[2].SetActive(false);
                     state_change = true;
                     state = 6;
+
+                    teleport_t.SetActive(false);
                 }
+
+                
                 break;
             case 6:
                 // Great! Let the game begin!
@@ -153,23 +178,15 @@ public class TutorialController : MonoBehaviour {
                 break;               
         }
 
-
-
-
-
-
-
-
-
-
-
-        // Debug
-        if (gameController.debugMode == false)
-            return;
         if (Input.GetKeyUp(KeyCode.Alpha0))
         {
             state = 0;
         }
+
+        // Debug
+        if (gameController.debugMode == false|| true)
+            return;
+
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
             state = 1;
@@ -193,6 +210,9 @@ public class TutorialController : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.Alpha6))
         {
             state = 6;
+            
         }
+
+        
     }
 }

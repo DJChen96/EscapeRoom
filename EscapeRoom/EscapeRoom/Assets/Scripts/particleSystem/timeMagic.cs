@@ -32,7 +32,7 @@ public class TimeMagic : MonoBehaviour
     public float old_eulerAngle;
     public float deltaEuler;
     public ClockTimeController clockPrefab;//This is the clock controlled on the wall;
-    public ClockTimeController theClockOnWand;
+
     public float minutes_float;
 
 
@@ -52,19 +52,22 @@ public class TimeMagic : MonoBehaviour
     {
         if (wc.timeMode)
         {
-            clockPrefab.controlled = true;
-            theClockOnWand.gameObject.SetActive(true);
-            theClockOnWand.controlled = true;
+           
             if (wc.time_triggered)
             {
-                
+
+                clockPrefab.controlled = true;
+
                 Vector2 m = a_move.GetAxis(SteamVR_Input_Sources.RightHand);
                 movement = new Vector3(m.x, 0, m.y);
                 turnAmount = Mathf.Atan2(movement.z, movement.x);
 
-                float minutesFloat = XYCoordinationToMinutesFloat(m.x, m.y);
-                clockPrefab.SetTime(minutesFloat);
-                theClockOnWand.SetTime(minutesFloat);
+
+                XYCoordinationToMinutesFloat(m.x, m.y);
+                
+               
+                //theClockOnWand.SetTime(minutesFloat);
+
                 //old_minutes_float = minutes_float = clockPrefab.minutes_float;
                 //Debug.Log(turnAmount);
                 //old_eulerAngle = 0;
@@ -89,20 +92,35 @@ public class TimeMagic : MonoBehaviour
                 }
 
             }
+            else
+            {
+                clockPrefab.controlled = false;
+
+            }
         }
         else {
-            theClockOnWand.controlled = false;
-            theClockOnWand.gameObject.SetActive(false);
+
             clockPrefab.controlled = false;
         }
 
     }
 
+    public void Uncontrolled()
+    {
+  
+        clockPrefab.controlled = false;
+    }
+
 
     private float last_input_time = 0;
     //private float old_miniuntOnController = 0;
-    private float XYCoordinationToMinutesFloat(float x, float y)
+    private void XYCoordinationToMinutesFloat(float x, float y)
     {
+
+
+        if (x == 0 || y == 0)
+            return;
+
         float miniuntOnController;
         float arctandxdy = Mathf.Atan(x / y);
 
@@ -123,23 +141,27 @@ public class TimeMagic : MonoBehaviour
 
         float time_diff = last_input_time == 0 ? 0 : Time.time - last_input_time;
 
-        float miniuntOnClock = minutes_float % 60;
-        float hourOnClock = (minutes_float - miniuntOnClock) / 60;
+        float miniuntOnClock = clockPrefab.minutes_float % 60;
+        float hourOnClock = (clockPrefab.minutes_float - miniuntOnClock) / 60;
 
-        if (time_diff < 0.5f)
+        //print("time_diff:" + time_diff + "miniuntOnClock:" + miniuntOnClock);
+
+        if (time_diff < 0.2f)
         {
-            if (57 <= miniuntOnClock && miniuntOnClock <= 60 && 0 <= miniuntOnController && miniuntOnController <= 3)
+            if (50 <= miniuntOnClock && miniuntOnClock <= 60 && 0 <= miniuntOnController && miniuntOnController <= 10)
             {
                 hourOnClock = hourOnClock == 11 ? 0 : hourOnClock + 1;
             }
-            if (57 <= miniuntOnController && miniuntOnController <= 60 && 0 <= miniuntOnClock && miniuntOnClock <= 3)
+            if (50 <= miniuntOnController && miniuntOnController <= 60 && 0 <= miniuntOnClock && miniuntOnClock <= 10)
             {
                 hourOnClock = hourOnClock == 0 ? 11 : hourOnClock - 1;
             }
         }
 
         last_input_time = Time.time;
-        return hourOnClock * 60 + miniuntOnController;
+        clockPrefab.SetTime(hourOnClock * 60 + miniuntOnController);
+        //theClockOnWand.SetTime(hourOnClock * 60 + miniuntOnController);
+
     }
 
 

@@ -12,6 +12,8 @@ public class Stage1Controller : MonoBehaviour {
 
     public Light l1;
     public Light l2;
+    public Light l3;
+    public Light l4;
 
 	// Use this for initialization
 	void Start () {
@@ -28,8 +30,8 @@ public class Stage1Controller : MonoBehaviour {
         while (!lit_room)
         {
             bool lit = true;
-            var torchs = torchGroup.GetComponentsInChildren<candle>();
-            foreach (candle t in torchs)
+            var torchs = torchGroup.GetComponentsInChildren<Candle>();
+            foreach (Candle t in torchs)
             {
                lit &= t.lit;
             }
@@ -44,17 +46,17 @@ public class Stage1Controller : MonoBehaviour {
 
             if (torchs[1].lit && !torchs[1].added)
             {
-                l1.intensity += 0.5f;
+                l2.intensity += 0.5f;
                 torchs[1].added = true;
             }
             if (torchs[2].lit && !torchs[2].added)
             {
-                l2.intensity += 0.5f;
+                l3.intensity += 0.5f;
                 torchs[2].added = true;
             }
             if (torchs[3].lit && !torchs[3].added)
             {
-                l2.intensity += 0.5f;
+                l4.intensity += 0.5f;
                 torchs[3].added = true;
             }
             yield return null;
@@ -63,16 +65,6 @@ public class Stage1Controller : MonoBehaviour {
         yield return new WaitForSeconds(2.0f);
 
         mc.gameObject.SetActive(true);
-
-        while (!waterStone.absorbed) {
-            yield return null;
-        }
-
-        mc = null;
-
-        yield return new WaitForSeconds(1.0f);
-        s1Passed = true;
-        Debug.Log("-------------------STAGE1-COMPLETED-------------------");
         
     }
 }

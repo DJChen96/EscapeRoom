@@ -11,6 +11,8 @@ public class PumpkinController : MonoBehaviour {
     public AudioClip audio;
     public bool debug_triger = false;
 
+    public GameObject sword;
+
     private bool breaked = false;
     // Use this for initialization
     void Start () {
@@ -50,9 +52,11 @@ public class PumpkinController : MonoBehaviour {
 
         soundEffectAudioSource.Play(audio);
         big_pumkin.SetActive(true);
+        sword.SetActive(true);
         StartCoroutine(Big_Pumpkin_Destory());
         this.gameObject.GetComponent<Collider>().enabled = false;
         this.gameObject.GetComponent<Renderer>().enabled = false;
+
     }
     IEnumerator Big_Pumpkin_Destory()
     {

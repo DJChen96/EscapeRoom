@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage2Controller : MonoBehaviour
+public class MermaidController : MonoBehaviour
 {
 
     //Two mermaid prefab
     public GameObject mermaidSmallPre;
     public GameObject mermaidBigPre;
-    public GameObject growthStone;
+    //public GameObject growthStone;
     public GameObject mermaidMorph;
     public GameObject bubble;
     //public GameObject MermaidMorph;
 
     public AudioClip[] mermailAudios;
 
-    private bool mermaidWatered = false;
+    public bool mermaidWatered = false;
     //public bool stage2Passed = false;
     //public bool songPlayed = false;
 
-    private bool speaking = false;
+    public bool speaking = false;
     public AudioSource audioSource;
     private Vector3 mermaidOriginPosition;
 
+    public MagicCrystal growthCrystal;
 
     private float[] MermaidInstructionSpeakWaitingSet = new float[] { 0, 0 ,6 };
     private float[] MermaidDispearSet = new float[] { 0, 0, 3 };
@@ -58,6 +59,7 @@ public class Stage2Controller : MonoBehaviour
             MermaidInstructionSpeakWaitingSet[0] = MermaidInstructionSpeakWaitingSet[1] < MermaidInstructionSpeakWaitingSet[2] ?
                 MermaidInstructionSpeakWaitingSet[0] : 2;
             mermaidSmallPre.transform.position = new Vector3(mermaidSmallPre.transform.position.x, mermaidSmallPre.transform.position.y + Time.deltaTime * 0.1f, mermaidSmallPre.transform.position.z);
+            this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + Time.deltaTime * 0.1f, this.gameObject.transform.position.z);
         }
 
         if (MermaidInstructionSpeakWaitingSet[0] == 2)
@@ -81,7 +83,8 @@ public class Stage2Controller : MonoBehaviour
             audioSource.Play();
             bubble.SetActive(true);
             mermaidBigPre.SetActive(false);
-            growthStone.SetActive(true);
+            growthCrystal.gameObject.SetActive(true);
+            growthCrystal.AbsorbMagic(2.0f);
             MermaidDispearSet[0] = 3;
         }
 
@@ -89,8 +92,9 @@ public class Stage2Controller : MonoBehaviour
 
 
 
-        if (gameController.debugMode == false||true)
+        if (gameController.debugMode == false)
             return;
+
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
             GameObject go = new GameObject

@@ -51,11 +51,10 @@ public class Book : MonoBehaviour
 
     }
 
-    private void NextPage()
+    public void NextPage()
     {
         if (i < Pages.Length)
         {
-
             nm++;
             _AudioSource.PlayOneShot(ClipLeaftPages);
             Pages[i].GetComponent<Animation>().clip = _ClipToLeftPage;
@@ -64,7 +63,7 @@ public class Book : MonoBehaviour
         }
     }
 
-    private void PrePage()
+    public void PrePage()
     {
         if (i > 0)
         {

@@ -7,7 +7,8 @@ public class MistletoeGrowthController : MonoBehaviour {
     public GameObject small_plant;
     public GameObject big_plant;
     public GameObject finial_plant;
-    public bool enable_growth = true;
+    public bool enable_growth = false;
+    public MagicCrystal timeCrystal;
 
     // Use this for initialization
     private bool isRunning = false;
@@ -52,17 +53,23 @@ public class MistletoeGrowthController : MonoBehaviour {
         }
         isRunning = false;
         finial_plant.SetActive(true);
+
         Destroy(small_plant.gameObject);
         Destroy(big_plant.gameObject);
+
+        timeCrystal.gameObject.SetActive(true);
+        timeCrystal.AbsorbMagic(2.0f);
     }
 
     private void OnParticleCollision(GameObject other)
     {
-        if (other.tag.Equals("GrowthMagic")&&!isRunning) {
-
-            Debug.Log("GROW");
+        if (other.tag.Equals("GrowthMagic")&&!isRunning && enable_growth) {
             Plant_growth();
-            
+        }
+
+        if (other.tag.Equals("Seed")) {
+            enable_growth = true;
+            Destroy(other.gameObject);
         }
     }
 }

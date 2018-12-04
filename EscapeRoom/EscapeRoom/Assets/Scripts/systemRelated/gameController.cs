@@ -18,7 +18,7 @@ public class gameController : MonoBehaviour {
     public GameObject candleGroup;
 
     public Stage1Controller s1c;
-    public Stage2Controller s2c;
+    //public Stage2Controller s2c;
     public Stage3Controller s3c;
     public Stage4Controller s4c;
     public Stage5Controller s5c;
