@@ -11,6 +11,8 @@ public class ObjectBrokenController : MonoBehaviour {
     private float waitingTime = 3f;
     public bool debug_triger = false;
 
+    public GameObject objectAppearBeforeBroken;
+
     private bool breaked =false;
 	// Use this for initialization
 	void Start () {
@@ -26,6 +28,9 @@ public class ObjectBrokenController : MonoBehaviour {
         StartCoroutine(Broken_box_disappear());
         this.gameObject.GetComponent<Collider>().enabled = false;
 
+        if (objectAppearBeforeBroken) {
+            objectAppearBeforeBroken.SetActive(true);
+        }
 
         Destroy(completeObj.gameObject);
 

@@ -46,12 +46,18 @@ public class MirrorController : MonoBehaviour {
     // Update is called once per frame
     private float mask_mouth_moving_time = 0;
 	void Update () {
-        if (this.gameObject.GetComponentInChildren<Interactable>().isHovering)
+
+
+        if (this.gameObject.GetComponent<Interactable>())
         {
-            //Debug.Log("____________mirror" + "_________________");
-            if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
+            //Debug.Log("FOUND INTERACTABLE COMPONENT");
+            if (this.gameObject.GetComponent<Interactable>().wasHovering)
             {
-                MirrorSpeak();
+                Debug.Log("____________mirror" + "_________________");
+                if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
+                {
+                    MirrorSpeak();
+                }
             }
         }
 
@@ -112,5 +118,13 @@ public class MirrorController : MonoBehaviour {
         }
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag.Equals("sword")) {
+            Stage5Controller s5controller = FindObjectOfType<Stage5Controller>();
+            s5controller.MirrorBreak();
+
+        }
+    }
+
 }

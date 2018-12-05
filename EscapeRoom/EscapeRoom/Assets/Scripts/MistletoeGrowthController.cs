@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class MistletoeGrowthController : MonoBehaviour {
 
@@ -67,7 +68,19 @@ public class MistletoeGrowthController : MonoBehaviour {
             Plant_growth();
         }
 
-        if (other.tag.Equals("Seed")) {
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("Seed"))
+        {
+            if (GameObject.Find("Highlighter"))
+            {
+                GameObject highlighter = GameObject.Find("Highlighter");
+                Destroy(highlighter);
+            }
+            if(other.gameObject.GetComponent<Interactable>())
+                other.gameObject.GetComponent<Interactable>().highlightOnHover = false;
             enable_growth = true;
             Destroy(other.gameObject);
         }

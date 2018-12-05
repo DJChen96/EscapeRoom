@@ -98,6 +98,7 @@ namespace Valve.VR.InteractionSystem
         {
             existingSkinnedRenderers = this.GetComponentsInChildren<SkinnedMeshRenderer>(true);
             highlightHolder = new GameObject("Highlighter");
+            //highlightHolder.transform.parent = this.transform;
             highlightSkinnedRenderers = new SkinnedMeshRenderer[existingSkinnedRenderers.Length];
 
             for (int skinnedIndex = 0; skinnedIndex < existingSkinnedRenderers.Length; skinnedIndex++)

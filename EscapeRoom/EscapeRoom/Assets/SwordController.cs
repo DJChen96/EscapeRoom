@@ -37,10 +37,16 @@ public class SwordController : MonoBehaviour {
 
         if (movingSword)
         {
-            this.GetComponent<Interactable>().highlightOnHover = true;
+            if (GameObject.Find("Highlighter"))
+            {
+                GameObject highlighter = GameObject.Find("Highlighter");
+                Destroy(highlighter);
+            }
+            this.GetComponent<Interactable>().highlightOnHover = false;
             this.gameObject.layer = 2;
             this.transform.position = Vector3.Lerp(this.transform.position, swordOnHand.transform.position, Time.deltaTime * 2f);
             this.transform.rotation = Quaternion.Lerp(this.transform.rotation, swordOnHand.transform.rotation, Time.deltaTime * 1.7f);
+            this.transform.localScale = Vector3.Lerp(this.transform.localScale, swordOnHand.transform.localScale, Time.deltaTime * 10f);
 
             if (Vector3.Distance(this.transform.position, swordOnHand.transform.position) < 0.1f && Quaternion.Angle(this.transform.rotation, swordOnHand.transform.rotation) < 1)
             {

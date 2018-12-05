@@ -7,6 +7,8 @@ using Valve.VR.InteractionSystem;
 
 public class wandController : MonoBehaviour {
 
+    public Transform emitPoint;
+
     [Tooltip("Activates an action set when switching magic")]
     public SteamVR_ActionSet activateActionSetOnAttach;
 
@@ -94,9 +96,9 @@ public class wandController : MonoBehaviour {
             magic_mode[i] = false;
         }
 
-        waterEnabled = growthEnabled = true;
+        //waterEnabled = growthEnabled = true;
         //timeEnabled = true;
-        growthMode = true;
+        //growthMode = true;
     }
 	
 	// Update is called once per frame
@@ -106,7 +108,6 @@ public class wandController : MonoBehaviour {
         CastTimeMagic();
         CastGrowthMagic();
         
-        //castingMagic();
         switchMagic();
     }
 
@@ -205,7 +206,7 @@ public class wandController : MonoBehaviour {
         if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && fireMode && !fire_generated)
         {
             //fire_inCD = true;
-            Instantiate(firePrefab, transform.position, transform.parent.rotation, this.transform);
+            Instantiate(firePrefab, this.transform.position, transform.parent.rotation, this.transform);
             // @Author Xiaotong Bao
             MagicAudioSource.Play(MagicClips[0]);
             //righthand.TriggerHapticPulse(1000);send pulse haptics
@@ -277,8 +278,8 @@ public class wandController : MonoBehaviour {
             //{
                 //waterEnabled = growthEnabled = timeEnabled = false;
             //}
-                Quaternion q = new Quaternion(0, transform.parent.rotation.y,0,transform.parent.rotation.w);
-                temp = Instantiate(cc, this.transform.position, q, pc.transform);
+                Quaternion q = new Quaternion(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z, transform.parent.rotation.w);
+                temp = Instantiate(cc, this.transform.position+new Vector3(0f,0.005f,0f), q, pc.transform);
             
             cc_generated = true;
             if (activateActionSetOnAttach != null)
@@ -288,6 +289,7 @@ public class wandController : MonoBehaviour {
         else if (ccSet.GetStateUp(SteamVR_Input_Sources.RightHand))
         {
             cc_generated = false;
+            if(temp!=null)
             GameObject.Destroy(temp.gameObject);
 
             fireMode = magic_mode[0];
@@ -295,13 +297,21 @@ public class wandController : MonoBehaviour {
             growthMode = magic_mode[2];
             timeMode = magic_mode[3];
 
-            //if (hand.otherHand.currentAttachedObjectInfo.HasValue == false || (hand.otherHand.currentAttachedObjectInfo.Value.interactable != null &&
-            //    hand.otherHand.currentAttachedObjectInfo.Value.interactable.activateActionSetOnAttach != this.activateActionSetOnAttach))
-            //{
             defaultAction.ActivatePrimary();
             platformAction.ActivateSecondary();
             activateActionSetOnAttach.Deactivate();   
         }
+
+        else if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(SteamVR_Input_Sources.RightHand) && cc_generated)
+        {
+            cc_generated = false;
+            GameObject.Destroy(temp.gameObject);
+
+            defaultAction.ActivatePrimary();
+            platformAction.ActivateSecondary();
+            activateActionSetOnAttach.Deactivate();
+        }
+
 
 
         if (cc_generated) {
@@ -336,10 +346,6 @@ public class wandController : MonoBehaviour {
                 magic_mode[1] = false;
                 magic_mode[2] = false;
                 magic_mode[3] = false;
-            }
-            else {
-
-
             }
             //print(magic_mode[0].ToString() + " " + magic_mode[1].ToString() + " " + magic_mode[2].ToString() + " " + magic_mode[3].ToString());
         }

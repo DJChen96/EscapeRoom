@@ -53,10 +53,10 @@ public class TimeMagic : MonoBehaviour
     {
         if (wc.timeMode)
         {
-            theClockOnWand.SetActive(false);
+            
             if (wc.time_triggered)
             {
-
+                theClockOnWand.SetActive(true);
                 clockPrefab.controlled = true;
 
                 Vector2 m = a_move.GetAxis(SteamVR_Input_Sources.RightHand);
@@ -82,15 +82,6 @@ public class TimeMagic : MonoBehaviour
 
                 //Vector2.Dot();
 
-                var array = this.gameObject.GetComponentsInChildren<ParticleSystem>();
-                foreach (ParticleSystem p in array)
-                {
-                    if (p.velocityOverLifetime.enabled)
-                    {
-                        var velocityOverLifetime = p.velocityOverLifetime;
-                        velocityOverLifetime.orbitalY = turnAmount;
-                    }
-                }
 
             }
             else
@@ -162,6 +153,8 @@ public class TimeMagic : MonoBehaviour
         last_input_time = Time.time;
         clockPrefab.SetTime(hourOnClock * 60 + miniuntOnController);
         //theClockOnWand.SetTime(hourOnClock * 60 + miniuntOnController);
+
+
 
     }
 

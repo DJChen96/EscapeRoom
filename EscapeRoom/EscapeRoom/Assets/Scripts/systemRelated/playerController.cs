@@ -46,6 +46,8 @@ public class playerController : MonoBehaviour
 
     public Hand righthand;
 
+    public float feetHeight = 0f;
+
     //public wandController wc;
 
     //public GameObject choice_prefab;
@@ -63,45 +65,17 @@ public class playerController : MonoBehaviour
     void Update()
     {
 
-
+        LockPlayerYAxis();
     }
 
 
-    void FixedUpdate()
-    {
-      
-        //RayCasting();
-        //switchMagic();
+
+
+
+    void LockPlayerYAxis() {
+        if (this.transform.position.y > 0.766) {
+            transform.position = new Vector3(this.transform.position.x, 0.766f, this.transform.position.z);
+        };
     }
-
-   
-    void HighlightObject(GameObject gameObject)
-    {
-        if (lastHighlightedObject != gameObject)
-        {
-            if (gameObject.GetComponent<MeshRenderer>() != null)
-            {
-                ClearHighlighted();
-                originalMaterial = gameObject.GetComponent<MeshRenderer>().sharedMaterial;
-                
-                gameObject.layer = 8;
-                lastHighlightedObject = gameObject;
-            }
-        }
-
-    }
-
-    void ClearHighlighted()
-    {
-        if (lastHighlightedObject != null)
-        {
-            //lastHighlightedObject.GetComponent<MeshRenderer>().sharedMaterial = originalMaterial;
-            //Debug.Log("leave");
-            lastHighlightedObject.layer = 0;
-            lastHighlightedObject = null;
-        }
-    }
-
-
     
 }

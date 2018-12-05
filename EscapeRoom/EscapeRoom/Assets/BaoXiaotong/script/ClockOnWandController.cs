@@ -12,6 +12,7 @@ public class ClockOnWandController : MonoBehaviour {
     public float minutes_float = 690;
     public GameObject sphere;
 
+    public GameObject timeMagic;
     private float pre_minutes_float =  -1;
     // Use this for initialization
     void Start()
@@ -39,7 +40,18 @@ public class ClockOnWandController : MonoBehaviour {
         {
             float minutes_pass = clockTimeController.minutes_float - pre_minutes_float;
             sphere.GetComponent<Renderer>().material.
-                SetTextureOffset("_MainTex", new Vector2(minutes_pass * -0.8f, timePass * 0.2f));
+                SetTextureOffset("_MainTex", new Vector2(minutes_pass * -0.005f, timePass * 0.3f));
+
+
+            var array = timeMagic.GetComponentsInChildren<ParticleSystem>();
+            foreach (ParticleSystem p in array)
+            {
+                if (p.velocityOverLifetime.enabled)
+                {
+                    var velocityOverLifetime = p.velocityOverLifetime;
+                    velocityOverLifetime.orbitalY = minutes_pass * -0.0005f;
+                }
+            }
 
         }
         pre_minutes_float = minutes_float;

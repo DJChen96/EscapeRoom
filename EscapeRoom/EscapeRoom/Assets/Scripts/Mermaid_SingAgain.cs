@@ -17,9 +17,11 @@ public class Mermaid_SingAgain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (this.GetComponent<Interactable>().isHovering && mc.mermaidWatered && !mc.speaking)
+        
+
+        if (this.gameObject.GetComponent<Interactable>().wasHovering && mc.mermaidWatered && !mc.speaking)
         {
-            //Debug.Log("____________mirror" + "_________________");
+           
             if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
             {
                 //MirrorSpeak();
@@ -29,17 +31,4 @@ public class Mermaid_SingAgain : MonoBehaviour {
             }
         }
     }
-
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.tag.Equals("LeftController"))
-    //    {
-    //        //Debug.Log("____________mirror" + "_________________");
-    //        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
-    //        {
-    //            //MirrorSpeak();
-    //            soundEffectAudioSource.Play(partOfYourWorld);
-    //        }
-    //    }
-    //}
 }

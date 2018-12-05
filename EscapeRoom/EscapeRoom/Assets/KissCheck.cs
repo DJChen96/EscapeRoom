@@ -38,7 +38,7 @@ public class KissCheck : MonoBehaviour {
         
 
         start_Coroutine = true;
-        Debug.Log("---------------------RELOAD SCENE---------------------------");
+        //Debug.Log("---------------------RELOAD SCENE---------------------------");
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
 

@@ -16,16 +16,21 @@ public class water_magic_control : MonoBehaviour
         ps.tag = "WaterMagic";
 
         childrenList = GetComponentsInChildren<ParticleSystem>();
+        if(childrenList != null)
         foreach (ParticleSystem child in childrenList)
         {
            
             child.tag = "WaterMagic";
+            var child_collision = child.collision;
+            child_collision.sendCollisionMessages = true;
 
         }
 
         if (ps != null)
         {
             ps.Play();
+            var ps_collision = ps.collision;
+            ps_collision.sendCollisionMessages = true;
         }
 
     }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
+using Valve.VR.InteractionSystem;
 
 public class Snitch : MonoBehaviour {
 
@@ -19,6 +21,20 @@ public class Snitch : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (this.GetComponent<Interactable>().isHovering)
+        {
+            Debug.Log("LeftController Got");
+            if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
+            {
+                if (GameObject.Find("Highlighter"))
+                {
+                    GameObject highlighter = GameObject.Find("Highlighter");
+                    Destroy(highlighter);
+                }
+                this.GetComponent<Interactable>().highlightOnHover = false;
+                Debug.Log("GRAB PRESSED");
+                StoneApear();
+            }
+        }
+    }
 }

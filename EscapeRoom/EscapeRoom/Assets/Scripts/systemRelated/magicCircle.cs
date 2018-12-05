@@ -27,6 +27,13 @@ public class magicCircle : MonoBehaviour {
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag.Equals("FireStone") ) {
+            if (GameObject.Find("Highlighter"))
+            {
+                GameObject highlighter = GameObject.Find("Highlighter");
+                Destroy(highlighter);
+            }
+            if(other.gameObject.GetComponent<Interactable>())
+                other.gameObject.GetComponent<Interactable>().highlightOnHover = false;
             //fire = true;
             //Instantiate(waterStone, this.transform.position+new Vector3(0.0f,1.0f, 0.0f), this.transform.rotation, this.transform.parent);
             if(!waterStone.activeInHierarchy)

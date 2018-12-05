@@ -1,58 +1,105 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
+using Valve.VR.InteractionSystem;
 
 public class interactItem : MonoBehaviour {
 
-    public playerController player;
-   // public Transform playerCam;
+    //public playerController player;
+    // public Transform playerCam;
+    public Interactable interactable_object;
 
-    bool hasPlayer;
-    public bool beingCarried = false;
-    public float dist_threshold = 1.0f;
+    public bool interact_particleSystem;
+    public bool interact_sound;
+    public bool interact_throwable;
+
+    public ParticleSystem ps;
+    public AudioClip audio;
+
+    private bool triggered = false;
+
+    SoundEffectAudioSource soundEffectAudioSource;
 
     // Use this for initialization
     void Start () {
-		
+        //interactable_object = this.gameObject.GetComponent<Interactable>();
+        soundEffectAudioSource = FindObjectOfType<SoundEffectAudioSource>();
+        interactable_object.highlightOnHover = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
-
-    private void FixedUpdate()
-    {
-        RangeTest();
-        PickUp();
+        Interaction_Items();
     }
 
-    void RangeTest() {
-        if (Vector3.Distance(player.transform.position, this.transform.position) < dist_threshold)
-        {
-            Debug.Log("with in range");
-            hasPlayer = true;
-        }
-        else
-        {
-            hasPlayer = false;
-        }
-    }
+    void Interaction_Items() {
 
-    void PickUp() {
-        if ( !beingCarried && hasPlayer && Input.GetKeyDown(KeyCode.F)) {
-            //Debug.Log("pick up"+ this.gameObject.name);
-            GetComponent<Rigidbody>().isKinematic = true;
-            transform.parent = player.transform;
-            player.carryItem = this;
-            beingCarried = true;
+        if (interact_particleSystem)
+        {
+
+            if (ps!=null)
+            {
+
+                if (this.gameObject.GetComponent<Interactable>().wasHovering)
+                {
+                    Debug.Log("particle system is hovering" + SteamVR_Input._default.inActions.GrabGrip.GetStateDown(SteamVR_Input_Sources.LeftHand));
+                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand) && !triggered)
+                    {
+                        ps.Play(true);
+                        triggered = true;
+                    }
+                    else if (!ps.IsAlive(true))
+                    {
+                       // triggered = false;
+                    }
+                }
+            }
+
         }
 
-        else if (beingCarried && Input.GetKeyDown(KeyCode.F)) {
-            //Debug.Log("drop" + this.gameObject.name);
-            GetComponent<Rigidbody>().isKinematic = false;
-            transform.parent = null;
-            beingCarried = false;
+        //if (interact_sound)
+        //{
+        //    if (audio)
+        //    {
+        //        if (interactable_object.gameObject.GetComponent<AudioClip>())
+        //        {
+        //            Debug.Log("ERROR: COUND NOT FOUND SOUND ON INTERACTABLE ITEMS");
+        //            return;
+        //        }
+
+        //        if (!soundEffectAudioSource)
+        //        {
+        //            Debug.Log("ERROR: NO SOUND EFFECT AUDIO SOURCE");
+        //            return;
+        //        }
+
+        //        if (interactable_object.isHovering)
+        //        {
+        //            if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(SteamVR_Input_Sources.LeftHand))
+        //            {
+        //                soundEffectAudioSource.Play(interactable_object.gameObject.GetComponent<AudioClip>());
+        //                triggered = true;
+        //            }
+
+        //        }
+        //    }
+        //}
+
+        if (interact_throwable)
+        {
+            if (interactable_object.gameObject.GetComponent<Throwable>())
+            {
+                Debug.Log("ERROR: COUND NOT FOUND THROWABLE ON INTERACTABLE ITEMS");
+                return;
+            }
+
+            Throwable th_on_Object = interactable_object.GetComponent<Throwable>();
+
+            th_on_Object.restoreOriginalParent = true;
+            th_on_Object.scaleReleaseVelocity = th_on_Object.GetComponent<Rigidbody>().mass;
+
         }
+
     }
 }

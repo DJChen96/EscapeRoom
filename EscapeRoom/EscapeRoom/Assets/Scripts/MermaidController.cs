@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class MermaidController : MonoBehaviour
 {
@@ -79,6 +80,18 @@ public class MermaidController : MonoBehaviour
 
         if (MermaidDispearSet[0] == 2)
         {
+            if (GameObject.Find("Highlighter"))
+            {
+                GameObject highlighter = GameObject.Find("Highlighter");
+                Destroy(highlighter);
+            }
+            var inter_array = this.gameObject.GetComponentsInChildren<Interactable>();
+            if (inter_array!=null) {
+                foreach (Interactable i in inter_array) {
+                    i.highlightOnHover = false;
+                }
+             }
+
             audioSource.clip = mermailAudios[3];
             audioSource.Play();
             bubble.SetActive(true);

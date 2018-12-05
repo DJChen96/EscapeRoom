@@ -12,6 +12,7 @@ public class MagicCrystal : MonoBehaviour {
 
     public bool absorbed = false;
     public ParticleSystem deadEffect;
+    public ParticleSystem flareEffect;
     private int shaderProperty;
     public Material dissolve;
 
@@ -67,7 +68,7 @@ public class MagicCrystal : MonoBehaviour {
             this.gameObject.GetComponent<Renderer>().material.SetFloat(shaderProperty, cutoff);
             yield return null;
         }
-
+        flareEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         deadEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 
         while(deadEffect.IsAlive(true)){

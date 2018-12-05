@@ -27,13 +27,16 @@ public class choiceController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        Quaternion q = new Quaternion(wc.transform.parent.rotation.x, wc.transform.parent.rotation.y, wc.transform.parent.rotation.z, wc.transform.parent.rotation.w);
+        this.transform.rotation = q;
+        this.transform.position = wc.transform.position;
 	}
 
     void checkStatus() {
         if (!wc.waterEnabled)
         {
-            Instantiate(unknown, water.position, unknown.transform.rotation, water);
+            Quaternion q = new Quaternion(0f,0f,0f,0f);
+            Instantiate(unknown, water.position, q, water);
         }
         else {
             Debug.Log(wc.waterEnabled);
@@ -43,8 +46,9 @@ public class choiceController : MonoBehaviour {
 
         if (!wc.timeEnabled)
         {
-
-            Instantiate(unknown, time.position, unknown.transform.rotation, time);
+            Quaternion q = new Quaternion(0f, 0f, 0f, 0f);
+            Instantiate(unknown, time.position, q, water);
+            //Instantiate(unknown, time.position, unknown.transform.rotation, time);
         }
         else
         {
@@ -54,7 +58,8 @@ public class choiceController : MonoBehaviour {
 
         if (!wc.growthEnabled)
         {
-            Instantiate(unknown, growth.position, unknown.transform.rotation, growth);
+            Quaternion q = new Quaternion(0f, 0f, 0f, 0f);
+            Instantiate(unknown, growth.position, q, water);
         }
         else
         {
