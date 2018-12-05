@@ -51,40 +51,39 @@ public class interactItem : MonoBehaviour {
                     }
                     else if (!ps.IsAlive(true))
                     {
-                       // triggered = false;
+                        triggered = false;
                     }
                 }
             }
 
         }
 
-        //if (interact_sound)
-        //{
-        //    if (audio)
-        //    {
-        //        if (interactable_object.gameObject.GetComponent<AudioClip>())
-        //        {
-        //            Debug.Log("ERROR: COUND NOT FOUND SOUND ON INTERACTABLE ITEMS");
-        //            return;
-        //        }
+        if (interact_sound)
+        {
+            if (audio)
+            {
+                if (interactable_object.gameObject.GetComponent<AudioClip>())
+                {
+                    Debug.Log("ERROR: COUND NOT FOUND SOUND ON INTERACTABLE ITEMS");
+                    return;
+                }
 
-        //        if (!soundEffectAudioSource)
-        //        {
-        //            Debug.Log("ERROR: NO SOUND EFFECT AUDIO SOURCE");
-        //            return;
-        //        }
+                if (!soundEffectAudioSource)
+                {
+                    Debug.Log("ERROR: NO SOUND EFFECT AUDIO SOURCE");
+                    return;
+                }
 
-        //        if (interactable_object.isHovering)
-        //        {
-        //            if (SteamVR_Input._default.inActions.GrabGrip.GetStateDown(SteamVR_Input_Sources.LeftHand))
-        //            {
-        //                soundEffectAudioSource.Play(interactable_object.gameObject.GetComponent<AudioClip>());
-        //                triggered = true;
-        //            }
+                if (interactable_object.wasHovering)
+                {
+                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
+                    {
+                        soundEffectAudioSource.Play(interactable_object.gameObject.GetComponent<AudioClip>());
+                    }
 
-        //        }
-        //    }
-        //}
+                }
+            }
+        }
 
         if (interact_throwable)
         {

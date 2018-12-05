@@ -88,13 +88,15 @@ public class wandController : MonoBehaviour {
         platformAction.ActivateSecondary();
 
         pc = FindObjectOfType<playerController>();
-        wandEffect = GetComponentInChildren<ParticleSystem>();
+        //wandEffect = GetComponentInChildren<ParticleSystem>();
         
         cc_generated = false;
 
         for (int i = 0; i < magic_mode.Length; i++) {
             magic_mode[i] = false;
         }
+
+        magic_mode[0] = true;
 
         //waterEnabled = growthEnabled = true;
         //timeEnabled = true;
@@ -107,97 +109,29 @@ public class wandController : MonoBehaviour {
         CastWaterMagic();
         CastTimeMagic();
         CastGrowthMagic();
-        
+        if (fireMode) {
+            var main = wandEffect.main;
+            main.startColor = new Color(1f,0f,0f, 64/255f);
+        }
+        else if (waterMode)
+        {
+            var main = wandEffect.main;
+            main.startColor = new Color(0f, 219/255f, 1f, 64/255f);
+        }
+        else if (fireMode)
+        {
+            var main = wandEffect.main;
+            main.startColor = new Color(0f, 1f, 70/255f, 64/255f);
+        }
+        else if (fireMode)
+        {
+            var main = wandEffect.main;
+            main.startColor = new Color(1f, 194/255f, 0f, 64/255f);
+        }
         switchMagic();
     }
 
-   /* void castingMagic() {
-        if (fireMode) {
-        }
-        //castingFire();
-        else if (waterMode)
-            castingWater();
-        else if (timeMode)
-            castingTime();
-        else if (growthMode)
-            castingGrowth();
-    }
-
-    void castingFire() {
-        if (fire_inCD )
-        {
-            if (firePrefab != null)
-            {
-                
-                fire_generated = true;
-                
-            }
-            else
-                print("NULL FIRE PREFAB");
-        }
-        else if (!fire_inCD)
-        {
-            
-        }
-    }
-
-    void castingWater()
-    {
-        if (waterEnabled)
-        {
-            if (water_inCD && !water_generated && waterMode)
-            {
-                if (waterPrefab != null)
-                {
-                    print("WATER GENERATED");
-                    //Instantiate(waterPrefab, transform.position + new Vector3(offsetX * 1f, offsetY * 1f, offsetZ * 1f), new Quaternion(0f, 0f, 0f, 0f), this.transform);
-                   
-                }
-                else
-                    print("NULL WATER PREFAB");
-            }
-            else if (!water_inCD)
-            {
-                water_generated = false;
-            }
-        }
-    }
-
-    void castingGrowth()
-    {
-        if (growth_inCD && !growth_generated && growthMode)
-        {
-            if (growthPrefab != null)
-            {
-                print("GROWTH GENERATED");
-                
-            }
-            else
-                print("NULL GROWTH PREFAB");
-        }
-        else if (!growth_inCD)
-        {
-            growth_generated = false;
-        }
-    }
-
-    void castingTime() {
-        if (time_triggered && !time_generated && timeMode)
-        {
-            if (timePrefab != null)
-            {
-                print("TIME GENERATED");
-                //Instantiate(timePrefab, transform.position + 5.0f*transform.forward + 5.0f*transform.up, pc.transform.rotation);
-                
-            }
-            else
-                print("NULL TIME PREFAB");
-        }
-        else if (!time_generated)
-        {
-            time_generated = false;
-        }
-    }*/
+  
 
     void CastFireMagic()
     {
@@ -279,7 +213,7 @@ public class wandController : MonoBehaviour {
                 //waterEnabled = growthEnabled = timeEnabled = false;
             //}
                 Quaternion q = new Quaternion(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z, transform.parent.rotation.w);
-                temp = Instantiate(cc, this.transform.position+new Vector3(0f,0.005f,0f), q, pc.transform);
+                temp = Instantiate(cc, this.transform.position+new Vector3(0f,0.02f,0f), q, pc.transform);
             
             cc_generated = true;
             if (activateActionSetOnAttach != null)

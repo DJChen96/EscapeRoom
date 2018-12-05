@@ -228,7 +228,8 @@ public class TutorialController : MonoBehaviour
                 break;
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha0))
+        if (Input.GetKeyUp(KeyCode.Alpha0)||(SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand)&& 
+            SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand)))//Hold two grab pinch to start
         {
             state = 0;
         }
