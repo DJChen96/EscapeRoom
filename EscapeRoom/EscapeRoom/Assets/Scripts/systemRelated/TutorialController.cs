@@ -26,10 +26,13 @@ public class TutorialController : MonoBehaviour
     public FadeCamera fadeCamera;
     public GameObject TutorialStage;
     public GameObject[] arrowList;
+    public GameObject[] arrowOnHandList;
     public GameObject[] controllerList;
-    public Transform controller1Transform;
+    public GameObject[] controllerOnHand;
+ 
     public Interactable apple;
 
+    private bool start_game = false;
     public Candle candle;
 
     public int[] status;
@@ -37,16 +40,19 @@ public class TutorialController : MonoBehaviour
     private float _fade_Duration = 0.75f;
     private float _fade_Counter = 0.75f;
 
-    public Transform origin_controller1Transform;
     public Quaternion rotation = Quaternion.Euler(1, 0, 1);
     bool s1passed = false;
     // Use this for initialization
+
+    public GameObject gameTitle;
     void Start()
     {
         if (wc == null)
         {
             wc = FindObjectOfType<wandController>();
         }
+        candle.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -79,9 +85,6 @@ public class TutorialController : MonoBehaviour
                 audioPlaying = state_change ? true : audioPlaying;
                 state_change = state_change ? false : state_change;
 
-
-
-
                 if (!audioPlaying)
                 {
                     state_change = true;
@@ -112,6 +115,7 @@ public class TutorialController : MonoBehaviour
                 audioPlaying = state_change ? true : audioPlaying;
                 state_change = state_change ? false : state_change;
 
+                arrowOnHandList[0].SetActive(true);
                 arrowList[0].SetActive(true);
                 if (apple.attachedToHand != null)
                 {
@@ -119,6 +123,7 @@ public class TutorialController : MonoBehaviour
                 }
                 if (!audioPlaying && s1passed)
                 {
+                    arrowOnHandList[0].SetActive(false);
                     arrowList[0].SetActive(false);
                     state_change = true;
                     state = 3;
@@ -131,14 +136,17 @@ public class TutorialController : MonoBehaviour
                 audioPlaying = state_change ? true : audioPlaying;
                 playerOrigin = state_change ? player.transform.position : playerOrigin;//Record the position at the first frame
                 state_change = state_change ? false : state_change;
-
+                teleport_t.SetActive(true);
+                arrowOnHandList[1].SetActive(true);
                 arrowList[1].SetActive(true);
+                arrowOnHandList[1].SetActive(true);
 
                 if (!audioPlaying && playerOrigin != null && Vector3.Distance(player.transform.position, playerOrigin) > 0.1f)
                 {
                     arrowList[1].SetActive(false);
+                    arrowOnHandList[1].SetActive(false);
                     state_change = true;
-                    state = 4;
+                    state = 5;
                 }
                 break;
 
@@ -147,29 +155,30 @@ public class TutorialController : MonoBehaviour
                 audioPlayed = state_change ? false : audioPlayed;
                 audioPlaying = state_change ? true : audioPlaying;
                 state_change = state_change ? false : state_change;
+                
+                //controllerList[0].transform.rotation = controller1Transform.rotation;
+                //controllerList[0].transform.position = controller1Transform.position; 
 
-                controllerList[0].transform.rotation = controller1Transform.rotation;
-                controllerList[0].transform.position = controller1Transform.position; ;
+                //arrowList[3].SetActive(true);
+                //arrowList[4].SetActive(true);
+                arrowOnHandList[2].SetActive(true);
+                arrowList[2].SetActive(true);
+                //if ( wc.cc_generated)
+                //{
+                //controllerList[0].transform.rotation = origin_controller1Transform.rotation;
+                //controllerList[0].transform.position = origin_controller1Transform.position;
 
-                arrowList[3].SetActive(true);
-                arrowList[4].SetActive(true);
+                //    arrowList[3].SetActive(false);
+                //   arrowList[4].SetActive(false);
+                //    arrowList[1].SetActive(true);
+                // }
 
-                if ( wc.cc_generated)
+
+                if ( !audioPlaying)
                 {
-                    controllerList[0].transform.rotation = origin_controller1Transform.rotation;
-                    controllerList[0].transform.position = origin_controller1Transform.position;
-
-                    arrowList[3].SetActive(false);
-                    arrowList[4].SetActive(false);
-                    arrowList[1].SetActive(true);
-                }
-
-
-                if ( !audioPlaying && wc.fireMode)
-                {
-                    arrowList[3].SetActive(false);
-                    arrowList[4].SetActive(false);
-                    arrowList[1].SetActive(false);
+                    //arrowList[3].SetActive(false);
+                    //arrowList[4].SetActive(false);
+                    // arrowList[1].SetActive(false);
                     state_change = true;
                     state = 5;
                 }
@@ -177,15 +186,22 @@ public class TutorialController : MonoBehaviour
 
             case 5:
                 // Now, lit the candle, using what you’ve just learned.
-                audioPlayed = state_change ? false : audioPlayed;
-                audioPlaying = state_change ? true : audioPlaying;
-                state_change = state_change ? false : state_change;
+                if (state_change)
+                {
+                    audioPlayed = state_change ? false : audioPlayed;
+                    audioPlaying = state_change ? true : audioPlaying;
+                    state_change = state_change ? false : state_change;
+                    candle.gameObject.SetActive(true);
+                }
+                wc.fireMode = true;
 
-                arrowList[2].SetActive(true);
+
+                //arrowList[2].SetActive(true);
 
                 if (!audioPlaying && candle.lit)
                 {
                     arrowList[2].SetActive(false);
+                    arrowOnHandList[2].SetActive(false);
                     state_change = true;
                     state = 6;
 
@@ -195,10 +211,21 @@ public class TutorialController : MonoBehaviour
 
                 break;
             case 6:
-                // Great! Let the game begin!
-                audioPlayed = state_change ? false : audioPlayed;
-                audioPlaying = state_change ? true : audioPlaying;
-                state_change = state_change ? false : state_change;
+                if (state_change)
+                {
+                    // Great! Let the game begin!
+                    //set start color
+                    SteamVR_Fade.Start(Color.clear, 0f);
+                    //set and start fade to
+                    SteamVR_Fade.Start(Color.black, _fade_Duration);
+
+                    audioPlayed = false;
+                    audioPlaying =  true;
+                    state_change =  false;
+                    
+
+                }
+
                 if (!audioPlaying)
                 {
                     state_change = true;
@@ -206,13 +233,8 @@ public class TutorialController : MonoBehaviour
                 }
                 break;
             case 7:
-                
-                //set start color
-                SteamVR_Fade.Start(Color.clear, 0f);
-                //set and start fade to
-                SteamVR_Fade.Start(Color.black, _fade_Duration);
-               
-
+                Destroy(controllerOnHand[0]);
+                Destroy(controllerOnHand[1]);
                 player.transform.position = new Vector3(5.215653f, 0.766f, -6.725161f);
                 if (_fade_Counter <= 0.0f)
                 {
@@ -228,10 +250,16 @@ public class TutorialController : MonoBehaviour
                 break;
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha0)||(SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand)&& 
+        if (!start_game && Input.GetKeyUp(KeyCode.Alpha0)||(SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand)&& 
             SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand)))//Hold two grab pinch to start
         {
             state = 0;
+            apple.gameObject.SetActive(true);
+            gameTitle.SetActive(false);
+            //audioPlayed = state_change ? false : audioPlayed;
+            //audioPlaying = state_change ? true : audioPlaying;
+            //state_change = state_change ? false : state_change;
+            start_game = true;
         }
 
         // Debug

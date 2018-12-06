@@ -9,6 +9,8 @@ public class wandController : MonoBehaviour {
 
     public Transform emitPoint;
 
+    public float Offset;
+
     [Tooltip("Activates an action set when switching magic")]
     public SteamVR_ActionSet activateActionSetOnAttach;
 
@@ -20,7 +22,7 @@ public class wandController : MonoBehaviour {
 
     public float fire_cooldown = 2.0f;
    // public bool fire_inCD = false;
-    public bool fireMode = false;
+    public bool fireMode = true;
 
     public float water_cooldown = 2.0f;
     //public bool water_inCD = false;
@@ -83,6 +85,8 @@ public class wandController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        var main = wandEffect.main;
+        main.startColor = new Color(1f, 0f, 0f, 64 / 255f);
 
         defaultAction.ActivatePrimary();
         platformAction.ActivateSecondary();
@@ -97,10 +101,7 @@ public class wandController : MonoBehaviour {
         }
 
         magic_mode[0] = true;
-
-        //waterEnabled = growthEnabled = true;
-        //timeEnabled = true;
-        //growthMode = true;
+      
     }
 	
 	// Update is called once per frame
@@ -118,17 +119,17 @@ public class wandController : MonoBehaviour {
             var main = wandEffect.main;
             main.startColor = new Color(0f, 219/255f, 1f, 64/255f);
         }
-        else if (fireMode)
+        else if (growthMode)
         {
             var main = wandEffect.main;
             main.startColor = new Color(0f, 1f, 70/255f, 64/255f);
         }
-        else if (fireMode)
+        else if (timeMode)
         {
             var main = wandEffect.main;
             main.startColor = new Color(1f, 194/255f, 0f, 64/255f);
         }
-        switchMagic();
+        //switchMagic();
     }
 
   
@@ -213,7 +214,7 @@ public class wandController : MonoBehaviour {
                 //waterEnabled = growthEnabled = timeEnabled = false;
             //}
                 Quaternion q = new Quaternion(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z, transform.parent.rotation.w);
-                temp = Instantiate(cc, this.transform.position+new Vector3(0f,0.02f,0f), q, pc.transform);
+                temp = Instantiate(cc, this.transform.position, q, pc.transform);
             
             cc_generated = true;
             if (activateActionSetOnAttach != null)

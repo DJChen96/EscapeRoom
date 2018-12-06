@@ -14,8 +14,16 @@ public class interactItem : MonoBehaviour {
     public bool interact_sound;
     public bool interact_throwable;
 
+    private bool previous_attached;
+
+    public bool resetTransformAfterInteraction;
+
     public ParticleSystem ps;
     public AudioClip audio;
+
+    private Vector3 originalPos;
+    private Quaternion originalRot;
+    private Vector3 originalScale;
 
     private bool triggered = false;
 
@@ -23,6 +31,13 @@ public class interactItem : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        previous_attached = false;
+
+        originalPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+        originalRot = new Quaternion(gameObject.transform.rotation.x, gameObject.transform.rotation.y, gameObject.transform.rotation.z, gameObject.transform.rotation.w);
+        originalScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+
         //interactable_object = this.gameObject.GetComponent<Interactable>();
         soundEffectAudioSource = FindObjectOfType<SoundEffectAudioSource>();
         interactable_object.highlightOnHover = true;
@@ -60,15 +75,14 @@ public class interactItem : MonoBehaviour {
 
         if (interact_sound)
         {
-            if (audio)
-            {
-                if (interactable_object.gameObject.GetComponent<AudioClip>())
+            
+                if (audio == null)
                 {
                     Debug.Log("ERROR: COUND NOT FOUND SOUND ON INTERACTABLE ITEMS");
                     return;
                 }
 
-                if (!soundEffectAudioSource)
+                if (soundEffectAudioSource == null)
                 {
                     Debug.Log("ERROR: NO SOUND EFFECT AUDIO SOURCE");
                     return;
@@ -78,27 +92,45 @@ public class interactItem : MonoBehaviour {
                 {
                     if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
                     {
-                        soundEffectAudioSource.Play(interactable_object.gameObject.GetComponent<AudioClip>());
+                             soundEffectAudioSource.Play(audio);
+                    //soundEffectAudioSource.Play(interactable_object.gameObject.GetComponent<AudioClip>());
                     }
 
                 }
-            }
+            
         }
 
-        if (interact_throwable)
-        {
-            if (interactable_object.gameObject.GetComponent<Throwable>())
+       
+
+        if (resetTransformAfterInteraction) {
+
+            bool Attach = interactable_object.attachedToHand != null;
+            if (!Attach && previous_attached)
             {
-                Debug.Log("ERROR: COUND NOT FOUND THROWABLE ON INTERACTABLE ITEMS");
-                return;
+                Debug.Log("----interactable_object.attachedToHand == null----");
+                if (GameObject.Find("Highlighter"))
+                {
+                    GameObject highlighter = GameObject.Find("Highlighter");
+                    Destroy(highlighter);
+                }
+                //interactable_object.highlightOnHover = false;
+
+                this.transform.position = originalPos;
+                this.transform.rotation = originalRot;
+                this.transform.localScale = originalScale;
+
+                this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f,0f,0f);
             }
 
-            Throwable th_on_Object = interactable_object.GetComponent<Throwable>();
+                //Debug.Log("----interactable_object.attachedToHand is not null----");
+                //if (!interactable_object.highlightOnHover)
+                //    interactable_object.highlightOnHover = true;
 
-            th_on_Object.restoreOriginalParent = true;
-            th_on_Object.scaleReleaseVelocity = th_on_Object.GetComponent<Rigidbody>().mass;
+
+                previous_attached = Attach;
 
         }
+        
 
     }
 }

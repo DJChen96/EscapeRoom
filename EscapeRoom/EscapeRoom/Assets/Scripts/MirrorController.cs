@@ -120,11 +120,13 @@ public class MirrorController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        //Speed
         if (other.gameObject.tag.Equals("sword")) {
             Stage5Controller s5controller = FindObjectOfType<Stage5Controller>();
             s5controller.MirrorBreak();
-
         }
+
+
     }
 
 }

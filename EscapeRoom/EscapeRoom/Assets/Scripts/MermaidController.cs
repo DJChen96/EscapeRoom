@@ -166,8 +166,8 @@ public class MermaidController : MonoBehaviour
             {
                 Debug.Log("Oh nice. I shall give you this");
                 //Instantiate(growthStone, this.transform.position, new Quaternion(90f, 0, 0, 0));
-                audioSource.clip = mermailAudios[4];
-                audioSource.Play();
+                // audioSource.clip = mermailAudios[4];
+                // audioSource.Play();
 
                 MermaidDispearSet[0] = 1;
   

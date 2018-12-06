@@ -6,7 +6,7 @@ public class Stage1Controller : MonoBehaviour {
 
     public GameObject torchGroup;
     public bool lit_room;
-    public magicCircle mc;
+    //public magicCircle mc;
     public bool s1Passed = false;
     public MagicCrystal waterStone;
 
@@ -64,7 +64,7 @@ public class Stage1Controller : MonoBehaviour {
 
         yield return new WaitForSeconds(2.0f);
 
-        mc.gameObject.SetActive(true);
+        waterStone.gameObject.SetActive(true);
         
         
     }

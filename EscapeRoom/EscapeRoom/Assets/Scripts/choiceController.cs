@@ -29,7 +29,7 @@ public class choiceController : MonoBehaviour {
 	void Update () {
         Quaternion q = new Quaternion(wc.transform.parent.rotation.x, wc.transform.parent.rotation.y, wc.transform.parent.rotation.z, wc.transform.parent.rotation.w);
         this.transform.rotation = q;
-        this.transform.position = wc.transform.position;
+        this.transform.position = wc.transform.position + new Vector3(0f, 0.03f, 0f);
 	}
 
     void checkStatus() {

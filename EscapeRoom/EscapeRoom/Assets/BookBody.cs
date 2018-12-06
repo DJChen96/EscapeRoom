@@ -15,7 +15,7 @@ public class BookBody : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (this.GetComponent<Interactable>().isHovering)
+        if (this.gameObject.GetComponent<Interactable>().wasHovering)
         {
             // Debug.Log("____________book"+ index+"_________________");
             if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))

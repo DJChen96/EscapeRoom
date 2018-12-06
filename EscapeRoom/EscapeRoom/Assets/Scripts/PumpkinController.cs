@@ -21,7 +21,7 @@ public class PumpkinController : MonoBehaviour
     void Start()
     {
         //StartCoroutine(Pumpkin_growth_animation());
-        //Pumpkin_growth();
+        Pumpkin_growth();
     }
 
 

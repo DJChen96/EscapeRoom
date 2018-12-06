@@ -24,7 +24,7 @@ public class SwordController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (this.GetComponent<Interactable>().isHovering)
+        if (this.GetComponent<Interactable>().wasHovering)
         {
             Debug.Log("LeftController Got");
             if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
@@ -44,9 +44,8 @@ public class SwordController : MonoBehaviour {
             }
             this.GetComponent<Interactable>().highlightOnHover = false;
             this.gameObject.layer = 2;
-            this.transform.position = Vector3.Lerp(this.transform.position, swordOnHand.transform.position, Time.deltaTime * 2f);
-            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, swordOnHand.transform.rotation, Time.deltaTime * 1.7f);
-            this.transform.localScale = Vector3.Lerp(this.transform.localScale, swordOnHand.transform.localScale, Time.deltaTime * 10f);
+            this.transform.position = Vector3.Lerp(this.transform.position, swordOnHand.transform.position, Time.deltaTime * 10f);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, swordOnHand.transform.rotation, Time.deltaTime * 10f);
 
             if (Vector3.Distance(this.transform.position, swordOnHand.transform.position) < 0.1f && Quaternion.Angle(this.transform.rotation, swordOnHand.transform.rotation) < 1)
             {

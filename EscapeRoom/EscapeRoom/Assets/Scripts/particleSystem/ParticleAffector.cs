@@ -519,11 +519,7 @@ using System.Collections.Generic;
 
                 // ...
 
-                protected virtual void OnDrawGizmosSelected()
-                {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawWireSphere(transform.position + offset, scaledRadius);
-                }
+                
 
                 // =================================	
                 // End functions.
