@@ -17,6 +17,9 @@ public class interactItem : MonoBehaviour {
     private bool previous_attached;
 
     public bool resetTransformAfterInteraction;
+    public bool destroyHightlighter;
+    public bool enablePulse;
+    public float pulseDuraton;
 
     public ParticleSystem ps;
     public AudioClip audio;
@@ -29,11 +32,13 @@ public class interactItem : MonoBehaviour {
 
     SoundEffectAudioSource soundEffectAudioSource;
 
+    
+
     // Use this for initialization
     void Start () {
 
         previous_attached = false;
-
+      
         originalPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
         originalRot = new Quaternion(gameObject.transform.rotation.x, gameObject.transform.rotation.y, gameObject.transform.rotation.z, gameObject.transform.rotation.w);
         originalScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
@@ -100,10 +105,23 @@ public class interactItem : MonoBehaviour {
             
         }
 
-       
 
-        if (resetTransformAfterInteraction) {
 
+        if (resetTransformAfterInteraction)
+        {
+            bool Attach = interactable_object.attachedToHand != null;
+            if (!Attach && previous_attached)
+            {
+                this.transform.position = originalPos;
+                this.transform.rotation = originalRot;
+                this.transform.localScale = originalScale;
+
+                this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+             }
+        }
+
+        if (destroyHightlighter)
+        { 
             bool Attach = interactable_object.attachedToHand != null;
             if (!Attach && previous_attached)
             {
@@ -114,23 +132,26 @@ public class interactItem : MonoBehaviour {
                     Destroy(highlighter);
                 }
                 //interactable_object.highlightOnHover = false;
-
-                this.transform.position = originalPos;
-                this.transform.rotation = originalRot;
-                this.transform.localScale = originalScale;
-
-                this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f,0f,0f);
             }
-
-                //Debug.Log("----interactable_object.attachedToHand is not null----");
-                //if (!interactable_object.highlightOnHover)
-                //    interactable_object.highlightOnHover = true;
-
-
-                previous_attached = Attach;
-
+            previous_attached = Attach;
         }
         
+    }
+
+
+    void OnDestroy()
+    {
+
+        Debug.Log("----interactable_object.attachedToHand == null----");
+        if (GameObject.Find("Highlighter"))
+        {
+            GameObject highlighter = GameObject.Find("Highlighter");
+            Destroy(highlighter);
+        }
+        //interactable_object.highlightOnHover = false;
+
 
     }
+
 }
+

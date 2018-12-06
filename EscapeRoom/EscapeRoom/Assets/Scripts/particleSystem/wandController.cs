@@ -11,6 +11,10 @@ public class wandController : MonoBehaviour {
 
     public float Offset;
 
+    [SteamVR_DefaultAction("Haptic")]
+    public SteamVR_Action_Vibration hapticAction;
+    public SteamVR_Input_Sources handType;
+
     [Tooltip("Activates an action set when switching magic")]
     public SteamVR_ActionSet activateActionSetOnAttach;
 
@@ -21,13 +25,13 @@ public class wandController : MonoBehaviour {
     public SteamVR_ActionSet platformAction;
 
     public float fire_cooldown = 2.0f;
-   // public bool fire_inCD = false;
+    // public bool fire_inCD = false;
     public bool fireMode = true;
 
     public float water_cooldown = 2.0f;
     //public bool water_inCD = false;
     public bool waterMode = false;
-    
+
     public bool timeMode = false;
     public bool time_triggered = false;
 
@@ -35,11 +39,9 @@ public class wandController : MonoBehaviour {
     public bool growthMode = false;
     //public bool growth_inCD = false;
 
-    
     public bool waterEnabled = false;
     public bool growthEnabled = false;
     public bool timeEnabled = false;
-
 
     public playerController pc;
     public GameObject firePrefab;
@@ -84,7 +86,7 @@ public class wandController : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         var main = wandEffect.main;
         main.startColor = new Color(1f, 0f, 0f, 64 / 255f);
 
@@ -93,7 +95,7 @@ public class wandController : MonoBehaviour {
 
         pc = FindObjectOfType<playerController>();
         //wandEffect = GetComponentInChildren<ParticleSystem>();
-        
+
         cc_generated = false;
 
         for (int i = 0; i < magic_mode.Length; i++) {
@@ -101,7 +103,17 @@ public class wandController : MonoBehaviour {
         }
 
         magic_mode[0] = true;
-      
+
+    }
+
+    public void Haptics(float seconds)
+    {/// <param name="secondsFromNow">How long from the current time to execute the action (in seconds - can be 0)</param>
+     /// <param name="durationSeconds">How long the haptic action should last (in seconds)</param>
+     /// <param name="frequency">How often the haptic motor should bounce (0 - 320 in hz. The lower end being more useful)</param>
+     /// <param name="amplitude">How intense the haptic action should be (0 - 1)</param>
+     /// <param name="inputSource">The device you would like to execute the haptic action. Any if the action is not device specific.</param>
+        //float seconds = (float)microSecondsDuration / 10f;
+        hapticAction.Execute(0, seconds, 320, 1, handType);
     }
 	
 	// Update is called once per frame
@@ -144,11 +156,16 @@ public class wandController : MonoBehaviour {
             Instantiate(firePrefab, this.transform.position, transform.parent.rotation, this.transform);
             // @Author Xiaotong Bao
             MagicAudioSource.Play(MagicClips[0]);
-            //righthand.TriggerHapticPulse(1000);send pulse haptics
+            //SteamVR_Input_Sources.RightHand.TriggerHapticPulse(1000);//send pulse haptics
             fire_generated = true;
+            Haptics(2f);
+
         }
         if (fire_generated && fire_cooldown > 0.0f)
+        {
             fire_cooldown -= Time.deltaTime;
+           
+        }
         if (fire_cooldown <= 0.0f)
         {
             fire_cooldown = 2.0f;
@@ -163,12 +180,14 @@ public class wandController : MonoBehaviour {
         //watermode = true;
         if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && waterMode && !water_generated)
         {
-           //water_inCD = true;
+            //water_inCD = true;
+           
             //righthand.TriggerHapticPulse(1000);send pulse haptics
             waterPrefab.Play();
             water_generated = true;
             // @Author Xiaotong Bao
             MagicAudioSource.Play(MagicClips[1]);
+            Haptics(2f);
         }
 
         if (water_generated && water_cooldown > 0.0f)
@@ -192,6 +211,7 @@ public class wandController : MonoBehaviour {
             growth_generated = true;
             // @Author Xiaotong Bao
             MagicAudioSource.Play(MagicClips[2]);
+            Haptics(2f);
         }
 
         if (growth_generated && growth_cooldown > 0.0f)
@@ -304,6 +324,7 @@ public class wandController : MonoBehaviour {
             // @Author Xiaotong Bao
             MagicAudioSource.Play(MagicClips[3]);
             //fireMode = false;
+            Haptics(2f);
         }
         else if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) && time_triggered && timeMode)
         {//on CD

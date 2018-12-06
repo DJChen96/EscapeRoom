@@ -10,6 +10,8 @@ public class SwordController : MonoBehaviour {
     public GameObject theElderWand;
     private bool movingSword = false;
 
+    public GameObject swordAura;
+
     public AudioClip sowrdAudioClip;
     public SoundEffectAudioSource soundEffectAudioSource;
 
@@ -19,6 +21,7 @@ public class SwordController : MonoBehaviour {
     void Start () {
         book = FindObjectOfType<Book>();
         mirrorController = FindObjectOfType<MirrorController>();
+        swordAura.SetActive(true);
     }
 	
 	// Update is called once per frame
@@ -30,6 +33,7 @@ public class SwordController : MonoBehaviour {
             if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
             {
                 Debug.Log("GRAB PRESSED");
+                swordAura.SetActive(false);
                 movingSword = true;
                 soundEffectAudioSource.Play(sowrdAudioClip);
             }
@@ -37,6 +41,7 @@ public class SwordController : MonoBehaviour {
 
         if (movingSword)
         {
+
             if (GameObject.Find("Highlighter"))
             {
                 GameObject highlighter = GameObject.Find("Highlighter");
@@ -62,11 +67,11 @@ public class SwordController : MonoBehaviour {
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag.Equals("LeftController") )
-        {
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.tag.Equals("LeftController") )
+    //    {
             
-        }
-    }
+    //    }
+    //}
 }

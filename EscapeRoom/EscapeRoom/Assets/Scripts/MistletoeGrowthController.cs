@@ -62,14 +62,6 @@ public class MistletoeGrowthController : MonoBehaviour {
         timeCrystal.AbsorbMagic(2.0f);
     }
 
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.tag.Equals("GrowthMagic")&&!isRunning && enable_growth) {
-            Plant_growth();
-        }
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Seed"))
@@ -83,6 +75,7 @@ public class MistletoeGrowthController : MonoBehaviour {
                 other.gameObject.GetComponent<Interactable>().highlightOnHover = false;
             enable_growth = true;
             Destroy(other.gameObject);
+            Plant_growth();
         }
     }
 }

@@ -42,25 +42,20 @@ public class MirrorController : MonoBehaviour {
         
     }
 
-
-    // Update is called once per frame
     private float mask_mouth_moving_time = 0;
 	void Update () {
 
 
         if (this.gameObject.GetComponent<Interactable>())
         {
-            //Debug.Log("FOUND INTERACTABLE COMPONENT");
             if (this.gameObject.GetComponent<Interactable>().wasHovering)
             {
-                Debug.Log("____________mirror" + "_________________");
                 if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
                 {
                     MirrorSpeak();
                 }
             }
         }
-
 
 
         if (!lipSync.IsPlaying && speaking && !HeadAppear)

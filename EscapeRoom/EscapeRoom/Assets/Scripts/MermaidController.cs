@@ -27,7 +27,7 @@ public class MermaidController : MonoBehaviour
     public MagicCrystal growthCrystal;
 
     private float[] MermaidInstructionSpeakWaitingSet = new float[] { 0, 0 ,6 };
-    private float[] MermaidDispearSet = new float[] { 0, 0, 3 };
+    public float[] MermaidDispearSet = new float[] { 0, 0, 3 };
 
     // Use this for initialization
     void Start()
@@ -97,7 +97,7 @@ public class MermaidController : MonoBehaviour
             bubble.SetActive(true);
             mermaidBigPre.SetActive(false);
             growthCrystal.gameObject.SetActive(true);
-            growthCrystal.AbsorbMagic(2.0f);
+            
             MermaidDispearSet[0] = 3;
         }
 
@@ -140,52 +140,46 @@ public class MermaidController : MonoBehaviour
 
     public void MermaidInstructionSpeak()
     {
-       
-
         if (speaking)
             return;
 
-        //MermaidMorph.SetActive(true);
         speaking = true;
         mermaidSmallPre.SetActive(false);
         mermaidBigPre.SetActive(true);
         audioSource.clip = mermailAudios[0];
         audioSource.Play();
         mermaidWatered = true;
-
     }
+
+   
 
 
     private void OnParticleCollision(GameObject other)
     {
 
+        
         if (mermaidWatered && !speaking)
         {
-            speaking = true;
+            
             if (other.tag.Equals("splitPotion"))
             {
-                Debug.Log("Oh nice. I shall give you this");
-                //Instantiate(growthStone, this.transform.position, new Quaternion(90f, 0, 0, 0));
-                // audioSource.clip = mermailAudios[4];
-                // audioSource.Play();
-
+                speaking = true;
                 MermaidDispearSet[0] = 1;
-  
-
             }
             else if (other.tag.Equals("lovePotion"))
             {
+                speaking = true;
                 audioSource.clip = mermailAudios[2];
                 audioSource.Play();
-
             }
             else if (other.tag.Equals("truthSerum"))
             {
+                speaking = true;
                 audioSource.clip = mermailAudios[1];
                 audioSource.Play();
-
             }
         }
+
 
         if (!mermaidWatered)
         {

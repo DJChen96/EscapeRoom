@@ -20,10 +20,16 @@ public class BookBody : MonoBehaviour {
             // Debug.Log("____________book"+ index+"_________________");
             if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
             {
-                if (index == 0)
-                    book.NextPage();
-                if (index == 1)
-                    book.PrePage();
+               // if (index == 0)
+               // {
+               //     Debug.Log("next page");
+               //     book.NextPage();
+               // }
+              //  if (index == 1)
+               // {
+              //      Debug.Log("previous page");
+               //     book.PrePage();
+               // }
             }
         }
 

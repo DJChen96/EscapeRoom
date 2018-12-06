@@ -7,7 +7,8 @@ using Valve.VR.InteractionSystem;
 public class TutorialController : MonoBehaviour
 {
 
-    public GameObject teleport_t;
+    public GameObject teleport_g1;
+    public GameObject teleport_g2;
 
     public GameObject player;
     public AudioClip[] tutorialAudioArray;
@@ -136,7 +137,7 @@ public class TutorialController : MonoBehaviour
                 audioPlaying = state_change ? true : audioPlaying;
                 playerOrigin = state_change ? player.transform.position : playerOrigin;//Record the position at the first frame
                 state_change = state_change ? false : state_change;
-                teleport_t.SetActive(true);
+                teleport_g1.SetActive(true);
                 arrowOnHandList[1].SetActive(true);
                 arrowList[1].SetActive(true);
                 arrowOnHandList[1].SetActive(true);
@@ -146,7 +147,7 @@ public class TutorialController : MonoBehaviour
                     arrowList[1].SetActive(false);
                     arrowOnHandList[1].SetActive(false);
                     state_change = true;
-                    state = 5;
+                    state = 4;
                 }
                 break;
 
@@ -155,14 +156,15 @@ public class TutorialController : MonoBehaviour
                 audioPlayed = state_change ? false : audioPlayed;
                 audioPlaying = state_change ? true : audioPlaying;
                 state_change = state_change ? false : state_change;
-                
+
                 //controllerList[0].transform.rotation = controller1Transform.rotation;
                 //controllerList[0].transform.position = controller1Transform.position; 
-
+                wc.fireMode = true;
                 //arrowList[3].SetActive(true);
                 //arrowList[4].SetActive(true);
                 arrowOnHandList[2].SetActive(true);
                 arrowList[2].SetActive(true);
+
                 //if ( wc.cc_generated)
                 //{
                 //controllerList[0].transform.rotation = origin_controller1Transform.rotation;
@@ -185,15 +187,19 @@ public class TutorialController : MonoBehaviour
                 break;
 
             case 5:
+
                 // Now, lit the candle, using what you’ve just learned.
                 if (state_change)
                 {
                     audioPlayed = state_change ? false : audioPlayed;
                     audioPlaying = state_change ? true : audioPlaying;
                     state_change = state_change ? false : state_change;
+                    teleport_g1.SetActive(false);
+                    teleport_g2.SetActive(true);
                     candle.gameObject.SetActive(true);
+                    
                 }
-                wc.fireMode = true;
+                
 
 
                 //arrowList[2].SetActive(true);
@@ -205,7 +211,8 @@ public class TutorialController : MonoBehaviour
                     state_change = true;
                     state = 6;
 
-                    teleport_t.SetActive(false);
+                    teleport_g1.SetActive(false);
+                    teleport_g2.SetActive(false);
                 }
 
 
@@ -233,9 +240,16 @@ public class TutorialController : MonoBehaviour
                 }
                 break;
             case 7:
+                if (state_change)
+                {
+                    MirrorController mirror = FindObjectOfType<MirrorController>();
+                    mirror.SetStage(1);
+                }
                 Destroy(controllerOnHand[0]);
                 Destroy(controllerOnHand[1]);
+
                 player.transform.position = new Vector3(5.215653f, 0.766f, -6.725161f);
+
                 if (_fade_Counter <= 0.0f)
                 {
                     SteamVR_Fade.Start(Color.black, 0f);
@@ -250,8 +264,8 @@ public class TutorialController : MonoBehaviour
                 break;
         }
 
-        if (!start_game && Input.GetKeyUp(KeyCode.Alpha0)||(SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand)&& 
-            SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand)))//Hold two grab pinch to start
+        if (!start_game &&( Input.GetKeyUp(KeyCode.Alpha0)||(SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand) ||
+            SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))))//Hold two grab pinch to start
         {
             state = 0;
             apple.gameObject.SetActive(true);
@@ -259,7 +273,8 @@ public class TutorialController : MonoBehaviour
             //audioPlayed = state_change ? false : audioPlayed;
             //audioPlaying = state_change ? true : audioPlaying;
             //state_change = state_change ? false : state_change;
-            start_game = true;
+           start_game = true;
+
         }
 
         // Debug

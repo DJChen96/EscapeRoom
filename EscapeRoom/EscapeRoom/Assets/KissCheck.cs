@@ -10,7 +10,7 @@ public class KissCheck : MonoBehaviour {
     private SoundEffectAudioSource soundEffectAudioSource;
     public AudioClip happy_aduio;
 
-    //public float _fadeDuration = 3.0f;
+    //public float offset = 1.0f;
 
     bool start_Coroutine = false;
     // Use this for initialization
@@ -21,9 +21,10 @@ public class KissCheck : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Vector3.Distance(camera_Player.position, this.transform.position) < 0.06f && !start_Coroutine)
+        if (Vector3.Distance(camera_Player.position, this.transform.position) < 1.0f && !start_Coroutine)
         {
             StartCoroutine(Reload());
+            start_Coroutine = true;
         }
 
     }
@@ -35,9 +36,6 @@ public class KissCheck : MonoBehaviour {
         yield return new WaitForSeconds(happy_aduio.length);
 
         //Invoke
-        
-
-        start_Coroutine = true;
         //Debug.Log("---------------------RELOAD SCENE---------------------------");
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);

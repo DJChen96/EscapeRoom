@@ -33,12 +33,16 @@ public class Stage5Controller : MonoBehaviour {
         if (swordBreak) swordBreak.SetActive(true);
         for (int i=0; i < completeObjectsBeforeMirrorBreak.Length; i++)
         {
-            if (completeObjectsBeforeMirrorBreak[i].gameObject.GetComponent<Interactable>()) {
-                completeObjectsBeforeMirrorBreak[i].GetComponent<Interactable>().highlightOnHover = false;
-                //If it could find an interactable component of objects we want to delete, set the highlight Hover
-                // To false, then delete.
+            //if (completeObjectsBeforeMirrorBreak[i].gameObject.GetComponent<Interactable>()) {
+            //    completeObjectsBeforeMirrorBreak[i].GetComponent<Interactable>().highlightOnHover = false;
+            //    //If it could find an interactable component of objects we want to delete, set the highlight Hover
+            //    // To false, then delete.
+            //}
+            if (GameObject.Find("Highlighter"))
+            {
+                GameObject highlighter = GameObject.Find("Highlighter");
+                Destroy(highlighter);
             }
-            
             Destroy(completeObjectsBeforeMirrorBreak[i]);
         }
 

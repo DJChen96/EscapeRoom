@@ -7,6 +7,8 @@ public class Candle : MonoBehaviour {
     public ParticleSystem flame;
     public bool lit;
     public bool added = false;//This is the variable to tell game controller that if it is already counted into the light intensity or not.
+    //public Light candle;
+
 
 	// Use this for initialization
 	void Start () {

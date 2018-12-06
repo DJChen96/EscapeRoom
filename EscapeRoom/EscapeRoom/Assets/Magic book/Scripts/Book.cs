@@ -17,6 +17,8 @@ public class Book : MonoBehaviour
     private int cls = 0, ct = 0, nm = 0;
     private float tm;
 
+   // private bool stage2Transition = false;
+
     void Start()
     {
         SetStage(1);
@@ -24,7 +26,10 @@ public class Book : MonoBehaviour
 
     public void SetStage(int stage)
     {
-        if (stage > 0 && stage < 5)
+        //if (!stage2Transition) return;
+
+        //if (stage == 2) stage2Transition = true;
+        if (stage > 0 && stage < 6)
         {
             ToPage(stage);
             switch (stage)

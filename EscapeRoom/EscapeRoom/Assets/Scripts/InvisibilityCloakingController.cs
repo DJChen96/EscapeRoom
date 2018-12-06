@@ -10,26 +10,19 @@ public class InvisibilityCloakingController : MonoBehaviour {
     public GameObject[] seed_box;
     public GameObject Cloak;
 
+    private bool triggered_Dissolve;
+
     private int shaderProperty;
     // Use this for initialization
     void Start () {
+        triggered_Dissolve = false;
         shaderProperty = Shader.PropertyToID("_cutoff");
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (this.gameObject.GetComponent<Interactable>())
-        {
-            //Debug.Log("FOUND INTERACTABLE COMPONENT");
-            if (this.gameObject.GetComponent<Interactable>().wasHovering)
-            { 
-                if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.LeftHand))
-                {
-                    Visible_and_disappear();
-                }
-            }
-        }
+        
     }
 
     private void Visible_and_disappear()
@@ -41,13 +34,14 @@ public class InvisibilityCloakingController : MonoBehaviour {
         StartCoroutine(CloakDissolve());
     }
 
-    //private void OnParticleCollision(GameObject other)
-    //{
-    //    if (other.tag.Equals("FireMagic"))
-    //    {
-    //        Visible_and_disappear();
-    //    }
-    //}
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.tag.Equals("GrowthMagic") && !triggered_Dissolve)
+        {
+            Visible_and_disappear();
+            triggered_Dissolve = true;
+        }
+    }
 
     IEnumerator CloakDissolve()
     {

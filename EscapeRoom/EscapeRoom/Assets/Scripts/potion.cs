@@ -9,13 +9,16 @@ public class potion : MonoBehaviour
 
     ParticleSystem ps;
     public Interactable int_gameObject;
-    
+
+    public GameObject mermaid_transform;
 
     // @Author Xiaotog Bao
     public GameObject cap;
     public AudioSource potionSpeaker;
     private float MAX_flowingTime = 4;
     private float flowingTime = 0;
+
+    public MermaidController mc;
 
     private Vector3 originalPos;
     private Quaternion originalRot;
@@ -29,6 +32,7 @@ public class potion : MonoBehaviour
         originalPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
         originalRot = new Quaternion(gameObject.transform.rotation.x, gameObject.transform.rotation.y, gameObject.transform.rotation.z, gameObject.transform.rotation.w);
 
+        mc = FindObjectOfType<MermaidController>();
         ps = GetComponentInChildren<ParticleSystem>();
     }
 
@@ -66,7 +70,7 @@ public class potion : MonoBehaviour
         bool Attach = int_gameObject.attachedToHand != null;
         if (!Attach && previous_attached)
         {
-            Debug.Log("----interactable_object.attachedToHand == null----");
+            //Debug.Log("----interactable_object.attachedToHand == null----");
             if (GameObject.Find("Highlighter"))
             {
                 GameObject highlighter = GameObject.Find("Highlighter");
@@ -82,7 +86,32 @@ public class potion : MonoBehaviour
 
         previous_attached = Attach;
 
+        //if (mc.mermaidWatered && !mc.speaking)
+        //{
+        //    if (Vector3.Distance(mermaid_transform.transform.position, this.transform.position) < 0.6f) {
+        //        if (this.gameObject.tag.Equals("splitPotion"))
+        //        {
+        //            Debug.Log("DISTANCE----Split");
+        //            mc.MermaidDispearSet[0] = 1;
+        //        }
+        //        else if (this.gameObject.tag.Equals("lovePotion")) {
+        //            Debug.Log("DISTANCE----Love");
+        //            mc.audioSource.clip = mc.mermailAudios[2];
+        //            mc.audioSource.Play();
+        //        }
+
+
+        //        else if (this.gameObject.tag.Equals("truthSerum")) {
+        //            Debug.Log("DISTANCE----Truth");
+        //            mc.audioSource.clip = mc.mermailAudios[1];
+        //            mc.audioSource.Play();
+        //        }
+
+        //    }
+        //}
 
     }
+
+
 }
 
